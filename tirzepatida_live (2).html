@@ -3,294 +3,634 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Controle da Tirzepatida — Luiza</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<title>Tirzepatida · Luiza</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--rose:#C2185B;--rose-light:#FCE4EC;--rose-mid:#F48FB1;--purple:#6A1B9A;--purple-l:#EDE7F6;--teal:#00695C;--teal-l:#E0F2F1;--dark:#1A237E;--ink:#2D1B4E;--bg:#FDF6FA;--card-bg:#FFFFFF;--border:#F3C5D8}
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
-  #loading{position:fixed;inset:0;background:linear-gradient(135deg,var(--rose) 0%,#880E4F 60%,var(--purple) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;transition:opacity .5s}
-  #loading.hidden{opacity:0;pointer-events:none}
-  .spinner{width:48px;height:48px;border:4px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;margin-bottom:20px}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  #loading p{color:rgba(255,255,255,.85);font-size:14px}
-  #error-box{display:none;background:#FFF3F7;border:2px solid var(--rose);border-radius:16px;padding:28px 32px;margin:40px auto;max-width:600px;text-align:center}
-  #error-box h3{color:var(--rose);margin-bottom:10px;font-size:18px}
-  #error-box p{font-size:13px;color:#555;line-height:1.6}
-  #error-box code{display:block;margin-top:12px;background:#F5F5F5;border-radius:8px;padding:10px 14px;font-size:12px;color:var(--purple);word-break:break-all}
-  header{background:linear-gradient(135deg,var(--rose) 0%,#880E4F 60%,var(--purple) 100%);padding:40px 48px 32px;position:relative;overflow:hidden}
-  header::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.06)}
-  .header-pill{display:inline-block;background:rgba(255,255,255,.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:4px 16px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:14px}
-  header h1{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,36px);color:#fff;font-weight:700}
-  header p{color:rgba(255,255,255,.75);font-size:14px;margin-top:6px;font-weight:300}
-  .header-meta{margin-top:20px;display:flex;gap:16px;flex-wrap:wrap}
-  .meta-chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:8px 16px;font-size:12px;color:rgba(255,255,255,.9)}
-  .meta-chip strong{display:block;font-size:16px;color:#fff}
-  .sync-btn{margin-left:auto;align-self:flex-end;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:10px;padding:8px 18px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:background .2s}
-  .sync-btn:hover{background:rgba(255,255,255,.28)}
-  main{max-width:1100px;margin:0 auto;padding:36px 24px 64px}
-  .section-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--rose);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--rose-light);display:flex;align-items:center;gap:10px}
-  .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;margin-bottom:40px}
-  .card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:20px 22px;transition:transform .2s,box-shadow .2s;box-shadow:0 2px 12px rgba(194,24,91,.06)}
-  .card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(194,24,91,.12)}
-  .card-icon{font-size:26px;margin-bottom:8px;display:block}
-  .card-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--rose);font-weight:600;margin-bottom:6px}
-  .card-value{font-family:'Playfair Display',serif;font-size:28px;color:var(--dark);font-weight:700;line-height:1}
-  .card-sub{font-size:11px;color:#888;margin-top:4px}
-  .card.accent{background:linear-gradient(135deg,var(--rose-light),#fff);border-color:var(--rose-mid)}
-  .card.green{background:linear-gradient(135deg,var(--teal-l),#fff);border-color:#80CBC4}
-  .card.purple{background:linear-gradient(135deg,var(--purple-l),#fff);border-color:#CE93D8}
-  .progress-section{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:28px 32px;margin-bottom:40px;box-shadow:0 2px 12px rgba(194,24,91,.06)}
-  .progress-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px}
-  .progress-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--dark)}
-  .progress-pct{font-size:32px;font-weight:700;color:var(--rose);font-family:'Playfair Display',serif}
-  .progress-bar-wrap{background:var(--rose-light);border-radius:100px;height:14px;overflow:hidden}
-  .progress-bar-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--rose),var(--purple));transition:width 1.2s cubic-bezier(.4,0,.2,1);width:0%}
-  .progress-labels{display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:#888}
-  .imc-section{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px}
-  @media(max-width:600px){.imc-section{grid-template-columns:1fr}}
-  .imc-card{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:24px;box-shadow:0 2px 12px rgba(194,24,91,.06)}
-  .imc-title{font-family:'Playfair Display',serif;font-size:16px;color:var(--dark);margin-bottom:16px}
-  .imc-scale{display:flex;height:10px;border-radius:100px;overflow:hidden;margin-bottom:10px;gap:2px}
-  .imc-seg{border-radius:4px}
-  .imc-labels{display:flex;justify-content:space-between;font-size:9px;color:#999;margin-bottom:16px}
-  .imc-result{background:var(--rose-light);border-radius:12px;padding:14px 18px;text-align:center}
-  .imc-number{font-size:38px;font-weight:700;font-family:'Playfair Display',serif;color:var(--rose)}
-  .imc-status{font-size:12px;color:var(--ink);margin-top:2px}
-  .injection-card{background:linear-gradient(135deg,#FFF8E1,#FFF3E0);border:1px solid #FFD54F;border-radius:20px;padding:24px;box-shadow:0 2px 12px rgba(245,158,11,.1)}
-  .injection-icon{font-size:40px;margin-bottom:10px;display:block}
-  .injection-date{font-family:'Playfair Display',serif;font-size:20px;color:#E65100;font-weight:700}
-  .injection-days{font-size:13px;color:#E65100;margin-top:4px;opacity:.8}
-  .table-wrap{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:40px;box-shadow:0 2px 12px rgba(194,24,91,.06)}
-  .table-header{background:linear-gradient(135deg,var(--rose) 0%,#880E4F 100%);padding:18px 24px;display:flex;justify-content:space-between;align-items:center}
-  .table-header h3{font-family:'Playfair Display',serif;color:#fff;font-size:16px}
-  .badge{background:rgba(255,255,255,.2);color:#fff;font-size:11px;padding:3px 10px;border-radius:100px;font-weight:500}
-  table{width:100%;border-collapse:collapse}
-  thead tr{background:var(--rose-light)}
-  thead th{padding:10px 14px;text-align:center;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--rose);font-weight:600;border-bottom:2px solid var(--border)}
-  tbody tr{border-bottom:1px solid #F9E8F0;transition:background .15s}
-  tbody tr:hover{background:#FFF0F7}
-  tbody tr.injection-row{background:#FCE4EC}
-  tbody tr.injection-row td{color:var(--rose);font-weight:600}
-  td{padding:9px 14px;text-align:center;font-size:12px;color:var(--ink)}
-  td.obs{text-align:left;font-size:11px;color:var(--purple)}
-  .var-pos{color:#D32F2F;font-weight:600}
-  .var-neg{color:#2E7D32;font-weight:600}
-  .measures-table thead th{color:var(--teal)}
-  .measures-table thead tr{background:var(--teal-l)}
-  .measures-table tbody tr{border-bottom:1px solid #E0F2F1}
-  .measures-table tbody tr:hover{background:#F0FBF9}
-  .last-updated{text-align:right;font-size:11px;color:#aaa;margin-bottom:8px}
-  footer{text-align:center;padding:24px;font-size:11px;color:#CCC;border-top:1px solid var(--border)}
+:root{
+  --rose:#C2185B;--rose-l:#FCE4EC;--rose-m:#F48FB1;
+  --plum:#6A0F49;--plum-l:#F8E8F2;
+  --teal:#00695C;--teal-l:#E0F2F1;
+  --gold:#E8A020;--gold-l:#FFF8E1;
+  --ink:#1A0A14;--muted:#8B7280;--border:#F0D8E8;
+  --bg:#FDF5F9;--card:#FFFFFF;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+#loading{position:fixed;inset:0;background:linear-gradient(160deg,var(--plum),var(--rose) 60%,#FF6B9D);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;transition:opacity .6s}
+#loading.out{opacity:0;pointer-events:none}
+.spinner{width:44px;height:44px;border:3px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin-bottom:16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+#loading p{color:rgba(255,255,255,.8);font-size:13px}
+#err{display:none;margin:32px auto;max-width:480px;background:#fff;border:1.5px solid var(--rose-m);border-radius:16px;padding:24px;text-align:center}
+#err h3{color:var(--rose);font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:8px}
+#err p{font-size:13px;color:var(--muted);line-height:1.6}
+#err code{display:block;margin-top:10px;background:#FFF0F5;border-radius:8px;padding:8px 12px;font-size:11px;color:var(--plum);word-break:break-all}
+
+/* HEADER */
+header{background:linear-gradient(160deg,var(--plum) 0%,var(--rose) 55%,#E91E8C 100%);padding:clamp(24px,5vw,48px) clamp(16px,4vw,48px) clamp(20px,4vw,40px);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,.05)}
+header::after{content:'';position:absolute;bottom:-100px;left:10%;width:250px;height:250px;border-radius:50%;background:rgba(255,255,255,.04)}
+.h-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.9);margin-bottom:12px}
+header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,5vw,42px);color:#fff;font-weight:600;line-height:1.15}
+header h1 em{font-style:italic;opacity:.85}
+.h-sub{color:rgba(255,255,255,.7);font-size:13px;margin-top:6px;font-weight:300}
+.h-chips{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:8px 14px;font-size:11px;color:rgba(255,255,255,.9)}
+.chip strong{display:block;font-size:15px;color:#fff;font-weight:600;margin-bottom:1px}
+.sync-btn{margin-left:auto;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:10px;padding:9px 16px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:all .2s;display:flex;align-items:center;gap:6px}
+.sync-btn:hover{background:rgba(255,255,255,.28)}
+
+/* MAIN */
+main{max-width:960px;margin:0 auto;padding:clamp(20px,4vw,40px) clamp(12px,3vw,24px) 64px}
+.last-up{text-align:right;font-size:11px;color:var(--muted);margin-bottom:20px}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3vw,22px);color:var(--rose);margin-bottom:16px;padding-bottom:10px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;gap:10px}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;margin-bottom:32px}
+.card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:18px 16px;transition:transform .2s,box-shadow .2s;box-shadow:0 2px 8px rgba(194,24,91,.05)}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(194,24,91,.1)}
+.card-ico{font-size:22px;margin-bottom:8px}
+.card-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--rose);font-weight:600;margin-bottom:4px}
+.card-val{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--ink);font-weight:700;line-height:1}
+.card-sub{font-size:10px;color:var(--muted);margin-top:3px}
+.card.accent{background:linear-gradient(135deg,var(--rose-l),#fff);border-color:var(--rose-m)}
+.card.green{background:linear-gradient(135deg,var(--teal-l),#fff);border-color:#80CBC4}
+.card.purple{background:linear-gradient(135deg,var(--plum-l),#fff);border-color:#CE93D8}
+.card.gold{background:linear-gradient(135deg,var(--gold-l),#fff);border-color:#FFD54F}
+
+/* PROGRESS */
+.progress-box{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:clamp(20px,4vw,28px);margin-bottom:32px;box-shadow:0 2px 8px rgba(194,24,91,.05)}
+.prog-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.prog-title{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink)}
+.prog-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.prog-pct{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:var(--rose);line-height:1}
+.prog-track{background:var(--rose-l);border-radius:100px;height:12px;overflow:hidden}
+.prog-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--rose),var(--plum));transition:width 1.4s cubic-bezier(.4,0,.2,1);width:0}
+.prog-labs{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--muted)}
+
+/* ANÁLISES RÁPIDAS */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:32px}
+.stat-mini{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(194,24,91,.05)}
+.stat-mini-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:600;margin-bottom:6px}
+.stat-mini-val{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--rose);font-weight:700;line-height:1}
+.stat-mini-sub{font-size:10px;color:var(--muted);margin-top:3px}
+
+/* IMC + INJEÇÃO */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+@media(max-width:520px){.two-col{grid-template-columns:1fr}}
+.imc-box{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:20px;box-shadow:0 2px 8px rgba(194,24,91,.05)}
+.imc-ttl{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--ink);margin-bottom:14px}
+.imc-bar{display:flex;height:8px;border-radius:100px;overflow:hidden;margin-bottom:8px;gap:2px}
+.imc-seg{border-radius:3px}
+.imc-labs{display:flex;justify-content:space-between;font-size:8px;color:var(--muted);margin-bottom:14px}
+.imc-result{background:var(--rose-l);border-radius:12px;padding:14px;text-align:center}
+.imc-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:700;color:var(--rose);line-height:1}
+.imc-status{font-size:11px;color:var(--ink);margin-top:3px}
+.inj-box{background:linear-gradient(135deg,#FFFDE7,#FFF8E1);border:1.5px solid #FFD54F;border-radius:24px;padding:20px;box-shadow:0 2px 8px rgba(245,158,11,.08)}
+.inj-ico{font-size:36px;margin-bottom:10px;display:block}
+.inj-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:#E65100;font-weight:600;margin-bottom:6px}
+.inj-date{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,3vw,20px);color:#E65100;font-weight:700;line-height:1.2}
+.inj-days{font-size:12px;color:#E65100;margin-top:5px;opacity:.8}
+
+/* GRÁFICO SVG PESO */
+.chart-box{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:clamp(16px,3vw,24px);margin-bottom:32px;box-shadow:0 2px 8px rgba(194,24,91,.05);overflow:hidden}
+.chart-title{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:16px}
+.chart-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+svg.peso-chart{display:block;min-width:300px}
+svg.med-chart{display:block;min-width:300px}
+
+/* TABELAS */
+.tbl-wrap{background:var(--card);border:1.5px solid var(--border);border-radius:24px;overflow:hidden;margin-bottom:32px;box-shadow:0 2px 8px rgba(194,24,91,.05)}
+.tbl-hdr{background:linear-gradient(135deg,var(--rose),var(--plum));padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.tbl-hdr h3{font-family:'Cormorant Garamond',serif;color:#fff;font-size:16px;font-weight:600}
+.badge{background:rgba(255,255,255,.2);color:#fff;font-size:10px;padding:3px 10px;border-radius:100px}
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;min-width:480px}
+thead tr{background:var(--rose-l)}
+thead th{padding:9px 12px;text-align:center;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--rose);font-weight:600;border-bottom:1.5px solid var(--border);white-space:nowrap}
+tbody tr{border-bottom:1px solid #FAF0F5;transition:background .15s}
+tbody tr:hover{background:#FFF5F8}
+tbody tr.inj-row{background:#FCE4EC}
+tbody tr.inj-row td{color:var(--rose);font-weight:500}
+td{padding:8px 12px;text-align:center;font-size:11px;color:var(--ink);white-space:nowrap}
+td.obs-cell{text-align:left;font-size:10px;color:var(--plum);white-space:normal;min-width:100px}
+.vp{color:#C62828;font-weight:600}
+.vn{color:#2E7D32;font-weight:600}
+.show-more-wrap{text-align:center;padding:12px}
+.show-more-btn{background:var(--rose-l);border:1.5px solid var(--rose-m);color:var(--rose);border-radius:100px;padding:8px 20px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;transition:all .2s}
+.show-more-btn:hover{background:var(--rose-m);color:#fff}
+
+/* MEDIDAS ANALYSIS CARDS */
+.med-analysis{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:32px}
+.med-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,105,92,.05)}
+.med-card-name{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);font-weight:600;margin-bottom:6px}
+.med-card-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.med-card-cur{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--ink);font-weight:700;line-height:1}
+.med-card-ini{font-size:10px;color:var(--muted);margin-top:2px}
+.med-diff{font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px}
+.med-diff.good{background:#E8F5E9;color:#2E7D32}
+.med-diff.bad{background:#FFEBEE;color:#C62828}
+.med-diff.zero{background:#F5F5F5;color:#888}
+.med-bar-track{background:#E0F2F1;border-radius:100px;height:5px;overflow:hidden}
+.med-bar-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--teal),#00BFA5);transition:width 1s ease}
+.med-hdr-teal{background:linear-gradient(135deg,var(--teal),#004D40)!important}
+.med-thead tr{background:var(--teal-l)!important}
+.med-thead th{color:var(--teal)!important}
+tbody.med-tbody tr{border-bottom:1px solid #E0F2F1}
+tbody.med-tbody tr:hover{background:#F0FBF9}
+
+footer{text-align:center;padding:20px;font-size:10px;color:var(--muted);border-top:1px solid var(--border)}
+
+@media(max-width:480px){
+  .cards{grid-template-columns:1fr 1fr}
+  .card-val{font-size:26px}
+  .prog-pct{font-size:28px}
+  .h-chips .sync-btn{margin-left:0;width:100%}
+  .stats-row{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
 
-<div id="loading"><div class="spinner"></div><p>Carregando dados da planilha…</p></div>
-<div id="error-box">
-  <h3>⚠️ Não foi possível carregar os dados</h3>
-  <p>Verifique sua conexão e tente novamente.</p>
-  <code id="error-detail"></code>
-</div>
+<div id="loading"><div class="spinner"></div><p>Carregando sua planilha…</p></div>
+<div id="err"><h3>Não foi possível carregar</h3><p>Verifique sua conexão e tente novamente.</p><code id="err-detail"></code></div>
 
 <header>
-  <div class="header-pill">💊 Tirzepatida · 2,5mg</div>
-  <h1>Controle do Tratamento</h1>
-  <p id="header-nome">Carregando…</p>
-  <div class="header-meta">
-    <div class="meta-chip"><strong id="inicio-fmt">—</strong>Início</div>
-    <div class="meta-chip"><strong id="dias-tratamento">—</strong>Dias em tratamento</div>
-    <div class="meta-chip"><strong id="proxima-injecao">—</strong>Próxima aplicação</div>
-    <button class="sync-btn" onclick="carregarDados()">🔄 Atualizar</button>
+  <div class="h-pill">💊 Tirzepatida 2,5mg</div>
+  <h1>Controle do<br><em>Tratamento</em></h1>
+  <p class="h-sub" id="h-nome">Carregando…</p>
+  <div class="h-chips">
+    <div class="chip"><strong id="h-inicio">—</strong>Início</div>
+    <div class="chip"><strong id="h-dias">—</strong>Dias</div>
+    <div class="chip"><strong id="h-prox">—</strong>Próx. aplicação</div>
+    <button class="sync-btn" onclick="carregar()">🔄 Atualizar</button>
   </div>
 </header>
 
 <main>
-  <div class="last-updated">Última atualização: <span id="last-update-time">—</span></div>
-  <div class="section-title">📊 Resumo Atual</div>
-  <div class="cards-grid">
-    <div class="card accent"><span class="card-icon">⚖️</span><div class="card-label">Peso Inicial</div><div class="card-value" id="peso-inicial">—</div><div class="card-sub">kg</div></div>
-    <div class="card"><span class="card-icon">📊</span><div class="card-label">Peso Atual</div><div class="card-value" id="peso-atual">—</div><div class="card-sub">kg</div></div>
-    <div class="card green"><span class="card-icon">📉</span><div class="card-label">Perdidos</div><div class="card-value" id="perdidos">—</div><div class="card-sub">kg</div></div>
-    <div class="card purple"><span class="card-icon">📈</span><div class="card-label">% Perdida</div><div class="card-value" id="pct-perdida">—</div><div class="card-sub">do peso inicial</div></div>
-    <div class="card"><span class="card-icon">🎯</span><div class="card-label">Meta</div><div class="card-value">57</div><div class="card-sub" id="faltam">kg</div></div>
+  <div class="last-up">Atualizado: <span id="last-up">—</span></div>
+
+  <div class="s-title">📊 Resumo</div>
+  <div class="cards">
+    <div class="card accent"><div class="card-ico">⚖️</div><div class="card-lbl">Peso Inicial</div><div class="card-val" id="c-pi">—</div><div class="card-sub">kg</div></div>
+    <div class="card"><div class="card-ico">📊</div><div class="card-lbl">Peso Atual</div><div class="card-val" id="c-pa">—</div><div class="card-sub">kg</div></div>
+    <div class="card green"><div class="card-ico">📉</div><div class="card-lbl">Perdidos</div><div class="card-val" id="c-perd">—</div><div class="card-sub">kg</div></div>
+    <div class="card purple"><div class="card-ico">📈</div><div class="card-lbl">% Perdida</div><div class="card-val" id="c-pct">—</div><div class="card-sub">do peso inicial</div></div>
+    <div class="card gold"><div class="card-ico">🎯</div><div class="card-lbl">Meta</div><div class="card-val">57</div><div class="card-sub" id="c-faltam">kg</div></div>
   </div>
-  <div class="progress-section">
-    <div class="progress-header">
-      <div><div class="progress-title">Jornada até a meta</div><div style="font-size:12px;color:#888;margin-top:4px"><span id="prog-desc">—</span></div></div>
-      <div class="progress-pct" id="prog-pct">—</div>
+
+  <div class="progress-box">
+    <div class="prog-hdr">
+      <div><div class="prog-title">Jornada até a meta</div><div class="prog-sub" id="prog-desc">—</div></div>
+      <div class="prog-pct" id="prog-pct">—</div>
     </div>
-    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="prog-bar"></div></div>
-    <div class="progress-labels"><span id="prog-inicio-lbl">Início</span><span>Meta: 57 kg</span></div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+    <div class="prog-labs"><span id="prog-ini-lbl">Início</span><span>Meta: 57 kg</span></div>
   </div>
-  <div class="imc-section">
-    <div class="imc-card">
-      <div class="imc-title">🩺 Índice de Massa Corporal</div>
-      <div class="imc-scale">
+
+  <!-- ANÁLISES DE MÉDIA -->
+  <div class="s-title">📈 Análises</div>
+  <div class="stats-row" id="stats-row"></div>
+
+  <!-- GRÁFICO PESO -->
+  <div class="chart-box">
+    <div class="chart-title">📉 Evolução do Peso</div>
+    <div class="chart-wrap"><canvas id="peso-canvas" height="180"></canvas></div>
+  </div>
+
+  <!-- IMC + INJEÇÃO -->
+  <div class="two-col">
+    <div class="imc-box">
+      <div class="imc-ttl">🩺 IMC Atual</div>
+      <div class="imc-bar">
         <div class="imc-seg" style="background:#80CBC4;flex:1.5"></div>
         <div class="imc-seg" style="background:#66BB6A;flex:1.5"></div>
         <div class="imc-seg" style="background:#FFF176;flex:1.5"></div>
         <div class="imc-seg" style="background:#FF8A65;flex:1"></div>
         <div class="imc-seg" style="background:#EF9A9A;flex:1"></div>
       </div>
-      <div class="imc-labels"><span>Abaixo</span><span>Normal</span><span>Sobrepeso</span><span>Ob. I</span><span>Ob. II+</span></div>
-      <div class="imc-result"><div class="imc-number" id="imc-value">—</div><div class="imc-status" id="imc-status">Preencha o peso para calcular</div></div>
+      <div class="imc-labs"><span>Abaixo</span><span>Normal</span><span>Sobrepeso</span><span>Ob.I</span><span>Ob.II</span></div>
+      <div class="imc-result"><div class="imc-num" id="imc-val">—</div><div class="imc-status" id="imc-lbl">—</div></div>
     </div>
-    <div class="injection-card">
-      <span class="injection-icon">💉</span>
-      <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#E65100;font-weight:600;margin-bottom:6px">Próxima Aplicação</div>
-      <div class="injection-date" id="inj-date">—</div>
-      <div class="injection-days" id="inj-days">TIRZEC 2,5mg · Toda Quinta-feira</div>
-      <div style="margin-top:16px;font-size:11px;color:#888">Altura: <strong id="altura-ref">—</strong></div>
+    <div class="inj-box">
+      <span class="inj-ico">💉</span>
+      <div class="inj-lbl">Próxima Aplicação</div>
+      <div class="inj-date" id="inj-date">—</div>
+      <div class="inj-days" id="inj-days">TIRZEC 2,5mg · Toda Quinta</div>
+      <div style="margin-top:14px;font-size:10px;color:#999">Altura: <strong id="h-alt">—</strong></div>
     </div>
   </div>
-  <div class="section-title">📋 Registro Diário de Peso</div>
-  <div class="table-wrap">
-    <div class="table-header"><h3>Acompanhamento Diário</h3><span class="badge" id="badge-registros">— pesos</span></div>
-    <div style="overflow-x:auto"><table><thead><tr><th>Data</th><th>Dia</th><th>Peso (kg)</th><th>Var. Dia</th><th>Var. Início</th><th>% Perdida</th><th>IMC</th><th>Observação</th></tr></thead><tbody id="daily-body"></tbody></table></div>
+
+  <!-- TABELA PESOS -->
+  <div class="s-title">📋 Registro de Peso</div>
+  <div class="tbl-wrap">
+    <div class="tbl-hdr"><h3>Acompanhamento Diário</h3><span class="badge" id="badge-pesos">—</span></div>
+    <div class="tbl-scroll"><table>
+      <thead><tr><th>Data</th><th>Dia</th><th>Peso</th><th>Var. Dia</th><th>Var. Início</th><th>% Perdida</th><th>IMC</th><th>Obs.</th></tr></thead>
+      <tbody id="tbody-pesos"></tbody>
+    </table></div>
+    <div class="show-more-wrap" id="show-more-wrap" style="display:none">
+      <button class="show-more-btn" id="show-more-btn" onclick="togglePesos()">Ver todos ▼</button>
+    </div>
   </div>
-  <div class="section-title">📐 Medidas Corporais</div>
-  <div class="table-wrap">
-    <div class="table-header" style="background:linear-gradient(135deg,#00695C,#004D40)"><h3>Acompanhamento Semanal (cm)</h3><span class="badge">Toda Quinta-feira</span></div>
-    <div style="overflow-x:auto"><table class="measures-table"><thead><tr><th>Semana</th><th>Busto</th><th>Braço Dir.</th><th>Braço Esq.</th><th>Cintura</th><th>Abdomen</th><th>Quadril</th><th>Coxa Dir.</th><th>Coxa Esq.</th></tr></thead><tbody id="measures-body"></tbody></table></div>
+
+  <!-- ANÁLISE MEDIDAS -->
+  <div class="s-title">📐 Análise das Medidas</div>
+  <div class="med-analysis" id="med-analysis"></div>
+
+  <!-- GRÁFICO MEDIDAS -->
+  <div class="chart-box" id="med-chart-box" style="display:none">
+    <div class="chart-title">📐 Evolução das Medidas</div>
+    <div class="chart-wrap"><canvas id="med-canvas" height="200"></canvas></div>
+  </div>
+
+  <!-- TABELA MEDIDAS -->
+  <div class="tbl-wrap">
+    <div class="tbl-hdr med-hdr-teal"><h3>Histórico Semanal (cm)</h3><span class="badge">Toda Quinta-feira</span></div>
+    <div class="tbl-scroll"><table>
+      <thead class="med-thead"><tr><th>Semana</th><th>Busto</th><th>Braço D.</th><th>Braço E.</th><th>Cintura</th><th>Abdômen</th><th>Quadril</th><th>Coxa D.</th><th>Coxa E.</th></tr></thead>
+      <tbody id="tbody-med" class="med-tbody"></tbody>
+    </table></div>
   </div>
 </main>
-<footer>💊 Controle da Tirzepatida · Dados lidos diretamente da sua planilha Google Sheets</footer>
+<footer>💊 Controle da Tirzepatida · Luiza Ribeiro de Melo</footer>
 
 <script>
-// URL do Apps Script
 const URL_SCRIPT = 'https://script.google.com/macros/s/AKfycbxxcX990ijg8AnL0Y8UQa5WEZw_7aOPadoxjnRYr_4UuHZl6KslzbpJsmV5_9je64lR/exec';
-
-const fmtDate = v => new Date(v).toLocaleDateString('pt-BR');
-const imcInfo = v => {
-  if(v<18.5) return {label:'Abaixo do Peso',color:'#00897B'};
-  if(v<25)   return {label:'Normal',color:'#388E3C'};
-  if(v<30)   return {label:'Sobrepeso',color:'#F9A825'};
-  if(v<35)   return {label:'Obesidade Grau I',color:'#E64A19'};
-  return {label:'Obesidade Grau II+',color:'#B71C1C'};
-};
+const $ = id => document.getElementById(id);
+const txt = (id,v) => { const e=$(id); if(e) e.textContent=v; };
+const fmtD = v => new Date(v).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});
+const fmtDLong = v => new Date(v).toLocaleDateString('pt-BR',{day:'2-digit',month:'long'});
+const fmtDFull = v => new Date(v).toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'});
 const fmtVar = v => v==null?'—':v===0?'0':(v>0?'+':'')+v.toFixed(1);
-const varCls = v => v==null?'':v>0?'var-pos':v<0?'var-neg':'';
-const txt = (id,v) => { const e=document.getElementById(id); if(e) e.textContent=v; };
-const nextThursday = () => {
+const varCls = v => v==null?'':v>0?'vp':v<0?'vn':'';
+const imcInfo = v => {
+  if(v<18.5) return {l:'Abaixo do Peso',c:'#00897B'};
+  if(v<25)   return {l:'Normal',c:'#388E3C'};
+  if(v<30)   return {l:'Sobrepeso',c:'#F9A825'};
+  if(v<35)   return {l:'Obesidade Grau I',c:'#E64A19'};
+  return {l:'Obesidade Grau II+',c:'#B71C1C'};
+};
+const nextThur = () => {
   const t=new Date(),d=t.getDay(),n=new Date(t);
   n.setDate(t.getDate()+(d<4?4-d:11-d)); return n;
 };
+const medKeys   = ['busto','bracoDireito','bracoEsquerdo','cintura','abdomen','quadril','coxaDireita','coxaEsquerda'];
+const medLabels = ['Busto','Braço D.','Braço E.','Cintura','Abdômen','Quadril','Coxa D.','Coxa E.'];
+const medColors = ['#E91E8C','#9C27B0','#673AB7','#00695C','#0288D1','#E65100','#388E3C','#C62828'];
+const sem = ['1ª','2ª','3ª','4ª','5ª','6ª','7ª','8ª','9ª','10ª','11ª','12ª','13ª','14ª','15ª'];
 
-function renderDados(data) {
-  const {info,diario,medidas} = data;
+// ── CANVAS CHART (sem lib) ──────────────────────────────────
+function desenharGraficoPeso(canvas, dados) {
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.parentElement.clientWidth || 600;
+  const H = 180;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
 
-  txt('header-nome', info.nome||'Luiza');
-  txt('altura-ref', info.altura ? String(info.altura).replace('.',',')+' m' : '1,60 m');
+  const pad = {t:20,r:20,b:36,l:44};
+  const cW = W - pad.l - pad.r;
+  const cH = H - pad.t - pad.b;
 
-  const dtI = new Date(info.dataInicio);
-  txt('inicio-fmt', dtI.toLocaleDateString('pt-BR'));
-  txt('dias-tratamento', Math.floor((new Date()-dtI)/86400000)+' dias');
+  const vals = dados.map(d=>d.y);
+  const minV = Math.min(...vals) - 0.5;
+  const maxV = Math.max(...vals) + 0.5;
+  const scaleX = i => pad.l + (i / (dados.length-1)) * cW;
+  const scaleY = v => pad.t + cH - ((v - minV) / (maxV - minV)) * cH;
 
-  const nxt = nextThursday();
-  txt('proxima-injecao', nxt.toLocaleDateString('pt-BR',{day:'2-digit',month:'long'}));
-  txt('inj-date', nxt.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'}));
-  const di = Math.round((nxt-new Date())/86400000);
-  txt('inj-days', di===0?'🎉 Hoje é dia de aplicação!':di===1?'Amanhã é dia de aplicação!':`Em ${di} dias · TIRZEC 2,5mg`);
-
-  const pesos = diario.filter(r=>r.peso!=null).map(r=>r.peso);
-  const pAtual = pesos.length>0 ? pesos[pesos.length-1] : null;
-  const pInicial = info.pesoInicial>0 ? info.pesoInicial : (pesos.length>0?pesos[0]:null);
-  const meta = info.meta||57;
-
-  if(pInicial) txt('peso-inicial', pInicial.toFixed(1));
-  if(pAtual)   txt('peso-atual',   pAtual.toFixed(1));
-
-  if(pInicial && pAtual) {
-    const perdidos = pInicial - pAtual;
-    txt('perdidos', perdidos.toFixed(1));
-    txt('pct-perdida', (perdidos/pInicial*100).toFixed(1)+'%');
-    const faltam = pAtual - meta;
-    txt('faltam', faltam>0?`Faltam ${faltam.toFixed(1)} kg`:'🎉 Meta alcançada!');
-    const pct = Math.min(100,Math.max(0,(perdidos/(pInicial-meta))*100));
-    txt('prog-pct', pct.toFixed(0)+'%');
-    txt('prog-desc', `${pInicial.toFixed(1)} → ${pAtual.toFixed(1)} kg → meta ${meta} kg`);
-    txt('prog-inicio-lbl', `Início: ${pInicial.toFixed(1)} kg`);
-    setTimeout(()=>{ document.getElementById('prog-bar').style.width=pct+'%'; },300);
-    const imc = pAtual/(info.altura*info.altura);
-    const cls = imcInfo(imc);
-    txt('imc-value', imc.toFixed(2));
-    document.getElementById('imc-value').style.color = cls.color;
-    txt('imc-status', cls.label);
+  // Grade
+  ctx.strokeStyle = '#F5E8F0';
+  ctx.lineWidth = 1;
+  for(let i=0;i<=4;i++){
+    const y = pad.t + (i/4)*cH;
+    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(pad.l+cW,y); ctx.stroke();
+    const v = maxV - (i/4)*(maxV-minV);
+    ctx.fillStyle = '#B08090'; ctx.font = '9px DM Sans'; ctx.textAlign = 'right';
+    ctx.fillText(v.toFixed(1), pad.l-6, y+3);
   }
 
-  // Tabela diária
-  const tbody = document.getElementById('daily-body');
-  tbody.innerHTML = '';
-  let n = 0;
-  diario.forEach(row => {
+  // Área gradiente
+  const grad = ctx.createLinearGradient(0, pad.t, 0, pad.t+cH);
+  grad.addColorStop(0, 'rgba(194,24,91,0.2)');
+  grad.addColorStop(1, 'rgba(194,24,91,0)');
+  ctx.beginPath();
+  ctx.moveTo(scaleX(0), scaleY(dados[0].y));
+  dados.forEach((d,i) => { if(i>0) ctx.lineTo(scaleX(i), scaleY(d.y)); });
+  ctx.lineTo(scaleX(dados.length-1), pad.t+cH);
+  ctx.lineTo(scaleX(0), pad.t+cH);
+  ctx.closePath();
+  ctx.fillStyle = grad; ctx.fill();
+
+  // Linha
+  ctx.beginPath();
+  ctx.strokeStyle = '#C2185B'; ctx.lineWidth = 2.5;
+  ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+  dados.forEach((d,i) => { i===0 ? ctx.moveTo(scaleX(i),scaleY(d.y)) : ctx.lineTo(scaleX(i),scaleY(d.y)); });
+  ctx.stroke();
+
+  // Pontos + labels
+  dados.forEach((d,i) => {
+    const x = scaleX(i), y = scaleY(d.y);
+    ctx.beginPath(); ctx.arc(x,y,3.5,0,Math.PI*2);
+    ctx.fillStyle='#fff'; ctx.fill();
+    ctx.strokeStyle='#C2185B'; ctx.lineWidth=2; ctx.stroke();
+    // Label eixo X a cada 2 pontos
+    if(i%2===0 || i===dados.length-1){
+      ctx.fillStyle='#B08090'; ctx.font='9px DM Sans'; ctx.textAlign='center';
+      ctx.fillText(d.x, x, H-pad.b+14);
+    }
+  });
+  // Meta
+  if(57 >= minV && 57 <= maxV){
+    const yMeta = scaleY(57);
+    ctx.setLineDash([4,3]); ctx.strokeStyle='#E91E8C'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(pad.l,yMeta); ctx.lineTo(pad.l+cW,yMeta); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='#E91E8C'; ctx.font='9px DM Sans'; ctx.textAlign='left';
+    ctx.fillText('meta 57', pad.l+4, yMeta-3);
+  }
+}
+
+function desenharGraficoMedidas(canvas, medidas) {
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.parentElement.clientWidth || 600;
+  const H = 200;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const pad = {t:20,r:100,b:36,l:44};
+  const cW = W - pad.l - pad.r;
+  const cH = H - pad.t - pad.b;
+
+  // Normaliza cada medida como % do valor inicial
+  const series = medKeys.map((key, ki) => {
+    const pts = medidas.map(m => m[key]).filter(v=>v!=null);
+    if(pts.length < 2) return null;
+    const ini = pts[0];
+    const rows = medidas.filter(m=>m[key]!=null);
+    return { label: medLabels[ki], color: medColors[ki],
+      pts: rows.map((m,i) => ({ x: i, y: (m[key]/ini)*100 })) };
+  }).filter(Boolean);
+
+  if(series.length === 0) return;
+
+  const nPts = Math.max(...series.map(s=>s.pts.length));
+  const scaleX = i => pad.l + (nPts <= 1 ? cW/2 : (i/(nPts-1))*cW);
+  const scaleY = v => pad.t + cH - ((v - 88) / (106 - 88)) * cH;
+
+  // Grade
+  ctx.strokeStyle = '#E8F5E9'; ctx.lineWidth = 1;
+  for(let i=0;i<=4;i++){
+    const y = pad.t + (i/4)*cH;
+    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(pad.l+cW,y); ctx.stroke();
+    const v = 106 - (i/4)*(106-88);
+    ctx.fillStyle='#aaa'; ctx.font='9px DM Sans'; ctx.textAlign='right';
+    ctx.fillText(v.toFixed(0)+'%', pad.l-4, y+3);
+  }
+
+  // Linha 100%
+  const y100 = scaleY(100);
+  ctx.setLineDash([3,2]); ctx.strokeStyle='#ccc'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(pad.l,y100); ctx.lineTo(pad.l+cW,y100); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#aaa'; ctx.font='9px DM Sans'; ctx.textAlign='left';
+  ctx.fillText('início', pad.l+4, y100-3);
+
+  // Series
+  series.forEach(s => {
+    ctx.beginPath(); ctx.strokeStyle=s.color; ctx.lineWidth=2;
+    ctx.lineJoin='round'; ctx.lineCap='round';
+    s.pts.forEach((p,i) => i===0 ? ctx.moveTo(scaleX(p.x),scaleY(p.y)) : ctx.lineTo(scaleX(p.x),scaleY(p.y)));
+    ctx.stroke();
+    // último ponto
+    const last = s.pts[s.pts.length-1];
+    ctx.beginPath(); ctx.arc(scaleX(last.x),scaleY(last.y),3,0,Math.PI*2);
+    ctx.fillStyle=s.color; ctx.fill();
+    // legenda
+    const li = series.indexOf(s);
+    ctx.fillStyle=s.color; ctx.font='9px DM Sans'; ctx.textAlign='left';
+    ctx.fillText(s.label, W-pad.r+8, scaleY(last.y)+3);
+  });
+
+  // Eixo X semanas
+  for(let i=0;i<nPts;i++){
+    ctx.fillStyle='#aaa'; ctx.font='9px DM Sans'; ctx.textAlign='center';
+    ctx.fillText('S'+(i+1), scaleX(i), H-pad.b+14);
+  }
+}
+
+// ── PESOS TABLE ──────────────────────────────────────────
+let todosPesos = [], mostrandoTudo = false;
+
+function renderPesos(rows, all) {
+  const preench = rows.filter(r=>r.peso!=null);
+  const prox    = rows.filter(r=>r.peso==null).slice(0,3);
+  const exibir  = all ? rows : [...preench.slice(-7), ...prox];
+  const tbody = $('tbody-pesos'); tbody.innerHTML = '';
+  exibir.forEach(row => {
     const isInj = row.obs && row.obs.includes('APLICAÇÃO');
-    if(row.peso) n++;
     const tr = document.createElement('tr');
-    if(isInj) tr.classList.add('injection-row');
+    if(isInj) tr.classList.add('inj-row');
     tr.innerHTML = `
-      <td>${fmtDate(row.data)}</td>
-      <td>${row.dia}</td>
-      <td>${row.peso!=null?row.peso.toFixed(1):'—'}</td>
+      <td>${fmtD(row.data)}</td>
+      <td style="font-size:10px">${row.dia}</td>
+      <td><strong>${row.peso!=null?row.peso.toFixed(1):'—'}</strong></td>
       <td class="${varCls(row.varDia)}">${fmtVar(row.varDia)}</td>
       <td class="${varCls(row.varInicio)}">${fmtVar(row.varInicio)}</td>
-      <td class="${row.pctPerdida!=null?(row.pctPerdida>=0?'var-neg':'var-pos'):''}">${row.pctPerdida!=null?(row.pctPerdida*100).toFixed(1)+'%':'—'}</td>
-      <td>${row.imc!=null?row.imc.toFixed(2):'—'}</td>
-      <td class="obs">${row.obs||''}</td>`;
+      <td class="${row.pctPerdida!=null?(row.pctPerdida>=0?'vn':'vp'):''}">${row.pctPerdida!=null?(row.pctPerdida*100).toFixed(1)+'%':'—'}</td>
+      <td>${row.imc!=null?row.imc.toFixed(1):'—'}</td>
+      <td class="obs-cell">${row.obs||''}</td>`;
     tbody.appendChild(tr);
   });
-  txt('badge-registros', n+' pesos registrados');
+  txt('badge-pesos', preench.length+' pesos registrados');
+  const wrap = $('show-more-wrap'), btn = $('show-more-btn');
+  if(preench.length > 7){ wrap.style.display='block'; btn.textContent = all?'Ver menos ▲':`Ver todos os ${rows.length} dias ▼`; }
+  else wrap.style.display='none';
+}
+function togglePesos(){ mostrandoTudo=!mostrandoTudo; renderPesos(todosPesos,mostrandoTudo); }
 
-  // Tabela medidas
-  const mbody = document.getElementById('measures-body');
-  mbody.innerHTML = '';
-  const sem=['1ª','2ª','3ª','4ª','5ª','6ª','7ª','8ª','9ª','10ª','11ª','12ª','13ª','14ª'];
+// ── RENDER PRINCIPAL ─────────────────────────────────────
+function render(data) {
+  const {info, diario, medidas} = data;
+
+  txt('h-nome', info.nome||'Luiza Ribeiro de Melo');
+  txt('h-alt', info.altura?String(info.altura).replace('.',',')+'m':'1,60m');
+
+  const dtI = new Date(info.dataInicio);
+  txt('h-inicio', dtI.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}));
+  const diasTotal = Math.floor((new Date()-dtI)/86400000);
+  txt('h-dias', diasTotal+' dias');
+
+  const nxt = nextThur();
+  txt('h-prox', fmtDLong(nxt));
+  txt('inj-date', fmtDFull(nxt));
+  const di = Math.round((nxt-new Date())/86400000);
+  txt('inj-days', di===0?'🎉 Hoje é dia de aplicação!':di===1?'Amanhã!':`Em ${di} dias · TIRZEC 2,5mg`);
+
+  const pesos  = diario.filter(r=>r.peso!=null).map(r=>r.peso);
+  const datas  = diario.filter(r=>r.peso!=null).map(r=>r.data);
+  const pA     = pesos.length>0 ? pesos[pesos.length-1] : null;
+  const pI     = info.pesoInicial>0 ? info.pesoInicial : (pesos.length>0?pesos[0]:null);
+  const meta   = info.meta||57;
+
+  if(pI) txt('c-pi', pI.toFixed(1));
+  if(pA) txt('c-pa', pA.toFixed(1));
+
+  if(pI && pA) {
+    const perd = pI-pA;
+    txt('c-perd', perd.toFixed(1));
+    txt('c-pct', (perd/pI*100).toFixed(1)+'%');
+    const falt = pA-meta;
+    txt('c-faltam', falt>0?`Faltam ${falt.toFixed(1)} kg`:'🎉 Meta!');
+    const pct = Math.min(100,Math.max(0,(perd/(pI-meta))*100));
+    txt('prog-pct', pct.toFixed(0)+'%');
+    txt('prog-desc', `${pI.toFixed(1)} → ${pA.toFixed(1)} kg → meta ${meta} kg`);
+    txt('prog-ini-lbl', `Início: ${pI.toFixed(1)} kg`);
+    setTimeout(()=>{ $('prog-fill').style.width=pct+'%'; },400);
+    const imc = pA/(info.altura*info.altura);
+    const cls = imcInfo(imc);
+    txt('imc-val', imc.toFixed(2));
+    $('imc-val').style.color = cls.c;
+    txt('imc-lbl', cls.l);
+  }
+
+  // ── ANÁLISES ──
+  const statsRow = $('stats-row');
+  statsRow.innerHTML = '';
+  if(pesos.length >= 2) {
+    // Média por dia
+    const diasDecorridos = Math.max(1, diasTotal);
+    const perdTotal = pI - pA;
+    const mediaDia = perdTotal / diasDecorridos;
+    // Média por semana
+    const mediasSemana = [];
+    for(let i=7; i<=pesos.length; i+=7) {
+      const s = pesos.slice(i-7,i);
+      mediasSemana.push(s[0]-s[s.length-1]);
+    }
+    const mediaSem = mediasSemana.length>0 ? mediasSemana.reduce((a,b)=>a+b,0)/mediasSemana.length : (perdTotal/(diasDecorridos/7));
+    // Projeção meta
+    const diasParaMeta = mediaDia > 0 ? Math.ceil((pA-meta)/mediaDia) : null;
+    const dataMeta = diasParaMeta ? new Date(Date.now()+diasParaMeta*86400000) : null;
+    // Semana atual
+    const pesosUltSemana = pesos.slice(-7);
+    const perdSemanaAtual = pesosUltSemana.length>=2 ? pesosUltSemana[0]-pesosUltSemana[pesosUltSemana.length-1] : null;
+
+    const items = [
+      {ico:'📅',lbl:'Média por Dia',val: mediaDia>0 ? '-'+mediaDia.toFixed(2)+' kg' : '0 kg', sub:'taxa de perda diária'},
+      {ico:'📆',lbl:'Média por Semana',val: mediaSem>0 ? '-'+mediaSem.toFixed(2)+' kg' : '0 kg', sub:'taxa semanal estimada'},
+      {ico:'📅',lbl:'Esta Semana',val: perdSemanaAtual!=null ? (perdSemanaAtual>=0?'-':'+')+(Math.abs(perdSemanaAtual)).toFixed(1)+' kg' : '—', sub:'últimos 7 registros'},
+      {ico:'🗓️',lbl:'Projeção da Meta',val: dataMeta ? dataMeta.toLocaleDateString('pt-BR',{month:'short',year:'numeric'}) : '—', sub: diasParaMeta ? `em ~${diasParaMeta} dias` : 'continue registrando'},
+    ];
+    items.forEach(item => {
+      const d = document.createElement('div');
+      d.className = 'stat-mini';
+      d.innerHTML = `<div class="stat-mini-lbl">${item.ico} ${item.lbl}</div><div class="stat-mini-val">${item.val}</div><div class="stat-mini-sub">${item.sub}</div>`;
+      statsRow.appendChild(d);
+    });
+  } else {
+    statsRow.innerHTML = '<p style="color:var(--muted);font-size:13px;grid-column:1/-1">Preencha mais dias para ver as análises de tendência.</p>';
+  }
+
+  // ── GRÁFICO PESO ──
+  if(pesos.length >= 2) {
+    const dadosGraf = diario.filter(r=>r.peso!=null).map(r=>({x:fmtD(r.data),y:r.peso}));
+    const canvas = $('peso-canvas');
+    setTimeout(()=>desenharGraficoPeso(canvas, dadosGraf), 100);
+  }
+
+  // ── TABELA PESOS ──
+  todosPesos = diario;
+  renderPesos(diario, false);
+
+  // ── ANÁLISE MEDIDAS ──
+  const medAnalysis = $('med-analysis');
+  medAnalysis.innerHTML = '';
+  const comDados = medidas.filter(m => medKeys.some(k=>m[k]!=null));
+  if(comDados.length === 0) {
+    medAnalysis.innerHTML = '<p style="color:var(--muted);font-size:13px;grid-column:1/-1">Preencha as medidas na planilha para ver a análise aqui.</p>';
+  } else {
+    medKeys.forEach((key,ki) => {
+      const vals = comDados.map(m=>m[key]).filter(v=>v!=null);
+      if(vals.length===0) return;
+      const ini = vals[0], cur = vals[vals.length-1], diff = cur-ini;
+      const pct = ini > 0 ? Math.min(100,(cur/ini)*100) : 100;
+      const dcls = diff<0?'good':diff>0?'bad':'zero';
+      const dtxt = diff===0?'=': (diff>0?'+':'')+diff.toFixed(1)+' cm';
+      const card = document.createElement('div');
+      card.className = 'med-card';
+      card.innerHTML = `
+        <div class="med-card-name">${medLabels[ki]}</div>
+        <div class="med-card-row">
+          <div><div class="med-card-cur">${cur}<small style="font-size:12px;font-weight:400"> cm</small></div>
+          <div class="med-card-ini">Início: ${ini} cm · ${vals.length} medições</div></div>
+          <div class="med-diff ${dcls}">${dtxt}</div>
+        </div>
+        <div class="med-bar-track"><div class="med-bar-fill" style="width:${pct}%"></div></div>`;
+      medAnalysis.appendChild(card);
+    });
+
+    // Gráfico medidas
+    const medChartBox = $('med-chart-box');
+    const temSeries = medKeys.some(k => comDados.filter(m=>m[k]!=null).length >= 2);
+    if(temSeries) {
+      medChartBox.style.display = 'block';
+      setTimeout(()=>desenharGraficoMedidas($('med-canvas'), comDados), 100);
+    }
+  }
+
+  // ── TABELA MEDIDAS ──
+  const tbodMed = $('tbody-med'); tbodMed.innerHTML = '';
   medidas.forEach((row,i) => {
-    const c=[row.busto,row.bracoDireito,row.bracoEsquerdo,row.cintura,row.abdomen,row.quadril,row.coxaDireita,row.coxaEsquerda];
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td style="font-weight:600;color:#00695C">${fmtDate(row.data)}<br><span style="font-size:10px;color:#aaa">${sem[i]||''} semana</span></td>
-      ${c.map(v=>`<td>${v!=null?v+' cm':'<span style="color:#ddd">—</span>'}</td>`).join('')}`;
-    mbody.appendChild(tr);
+    const prev = i>0?medidas[i-1]:null;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td style="font-weight:600;color:var(--teal)">${fmtD(row.data)}<br><span style="font-size:9px;color:var(--muted)">${sem[i]} sem.</span></td>
+      ${medKeys.map(k=>{
+        const v=row[k];
+        if(v==null) return '<td><span style="color:#ddd">—</span></td>';
+        const pv = prev?prev[k]:null;
+        const d = pv!=null?v-pv:null;
+        const ds = d!=null?`<span style="font-size:9px;${d<0?'color:#2E7D32':d>0?'color:#C62828':'color:#999'}">${d===0?'=':d<0?d.toFixed(1):'+'+d.toFixed(1)}</span>`:'';
+        return `<td>${v} ${ds}</td>`;
+      }).join('')}`;
+    tbodMed.appendChild(tr);
   });
 
-  txt('last-update-time', new Date().toLocaleString('pt-BR'));
-  document.getElementById('loading').classList.add('hidden');
+  txt('last-up', new Date().toLocaleString('pt-BR'));
+  $('loading').classList.add('out');
 }
 
-// ── JSONP — contorna bloqueio CORS do Google ──────────────
-window.__callback__ = function(data) {
-  clearTimeout(window.__timeout__);
-  document.getElementById('error-box').style.display = 'none';
-  renderDados(data);
+// ── JSONP ────────────────────────────────────────────────
+window.__cb__ = function(data) {
+  clearTimeout(window.__to__);
+  $('err').style.display = 'none';
+  render(data);
 };
-
-function carregarDados() {
-  document.getElementById('loading').classList.remove('hidden');
-  document.getElementById('error-box').style.display = 'none';
-
-  // Remove script anterior se existir
-  const old = document.getElementById('jsonp-script');
-  if(old) old.remove();
-
-  window.__timeout__ = setTimeout(() => {
-    document.getElementById('loading').classList.add('hidden');
-    document.getElementById('error-box').style.display = 'block';
-    document.getElementById('error-detail').textContent = 'Tempo esgotado. Verifique sua conexão.';
-  }, 10000);
-
-  const s = document.createElement('script');
-  s.id = 'jsonp-script';
-  s.src = URL_SCRIPT + '?callback=__callback__&t=' + Date.now();
-  s.onerror = () => {
-    clearTimeout(window.__timeout__);
-    document.getElementById('loading').classList.add('hidden');
-    document.getElementById('error-box').style.display = 'block';
-    document.getElementById('error-detail').textContent = 'Erro ao carregar o script. Verifique se o Apps Script está publicado como "Qualquer pessoa".';
-  };
+function carregar() {
+  $('loading').classList.remove('out');
+  $('err').style.display = 'none';
+  const old=$('jsonp-s'); if(old) old.remove();
+  window.__to__ = setTimeout(()=>{
+    $('loading').classList.add('out');
+    $('err').style.display='block';
+    $('err-detail').textContent='Tempo esgotado.';
+  },12000);
+  const s=document.createElement('script');
+  s.id='jsonp-s';
+  s.src=URL_SCRIPT+'?callback=__cb__&t='+Date.now();
+  s.onerror=()=>{ clearTimeout(window.__to__); $('loading').classList.add('out'); $('err').style.display='block'; $('err-detail').textContent='Erro ao carregar. Verifique o Apps Script.'; };
   document.body.appendChild(s);
 }
-
-carregarDados();
+carregar();
 </script>
 </body>
 </html>
