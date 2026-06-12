@@ -26,11 +26,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);-web
 #err h3{color:var(--rose);font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:8px}
 #err p{font-size:13px;color:var(--muted);line-height:1.6}
 #err code{display:block;margin-top:10px;background:#FFF0F5;border-radius:8px;padding:8px 12px;font-size:11px;color:var(--plum);word-break:break-all}
-
-/* HEADER */
 header{background:linear-gradient(160deg,var(--plum) 0%,var(--rose) 55%,#E91E8C 100%);padding:clamp(24px,5vw,48px) clamp(16px,4vw,48px) clamp(20px,4vw,40px);position:relative;overflow:hidden}
 header::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,.05)}
-header::after{content:'';position:absolute;bottom:-100px;left:10%;width:250px;height:250px;border-radius:50%;background:rgba(255,255,255,.04)}
 .h-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.9);margin-bottom:12px}
 header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,5vw,42px);color:#fff;font-weight:600;line-height:1.15}
 header h1 em{font-style:italic;opacity:.85}
@@ -40,13 +37,9 @@ header h1 em{font-style:italic;opacity:.85}
 .chip strong{display:block;font-size:15px;color:#fff;font-weight:600;margin-bottom:1px}
 .sync-btn{margin-left:auto;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:10px;padding:9px 16px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:all .2s;display:flex;align-items:center;gap:6px}
 .sync-btn:hover{background:rgba(255,255,255,.28)}
-
-/* MAIN */
 main{max-width:960px;margin:0 auto;padding:clamp(20px,4vw,40px) clamp(12px,3vw,24px) 64px}
 .last-up{text-align:right;font-size:11px;color:var(--muted);margin-bottom:20px}
 .s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3vw,22px);color:var(--rose);margin-bottom:16px;padding-bottom:10px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;gap:10px}
-
-/* CARDS */
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;margin-bottom:32px}
 .card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:18px 16px;transition:transform .2s,box-shadow .2s;box-shadow:0 2px 8px rgba(194,24,91,.05)}
 .card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(194,24,91,.1)}
@@ -58,8 +51,6 @@ main{max-width:960px;margin:0 auto;padding:clamp(20px,4vw,40px) clamp(12px,3vw,2
 .card.green{background:linear-gradient(135deg,var(--teal-l),#fff);border-color:#80CBC4}
 .card.purple{background:linear-gradient(135deg,var(--plum-l),#fff);border-color:#CE93D8}
 .card.gold{background:linear-gradient(135deg,var(--gold-l),#fff);border-color:#FFD54F}
-
-/* PROGRESS */
 .progress-box{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:clamp(20px,4vw,28px);margin-bottom:32px;box-shadow:0 2px 8px rgba(194,24,91,.05)}
 .prog-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px;flex-wrap:wrap;gap:8px}
 .prog-title{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink)}
@@ -68,15 +59,14 @@ main{max-width:960px;margin:0 auto;padding:clamp(20px,4vw,40px) clamp(12px,3vw,2
 .prog-track{background:var(--rose-l);border-radius:100px;height:12px;overflow:hidden}
 .prog-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--rose),var(--plum));transition:width 1.4s cubic-bezier(.4,0,.2,1);width:0}
 .prog-labs{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--muted)}
-
-/* ANÁLISES RÁPIDAS */
-.stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:32px}
+.stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:12px;margin-bottom:32px}
 .stat-mini{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(194,24,91,.05)}
 .stat-mini-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:600;margin-bottom:6px}
 .stat-mini-val{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--rose);font-weight:700;line-height:1}
 .stat-mini-sub{font-size:10px;color:var(--muted);margin-top:3px}
-
-/* IMC + INJEÇÃO */
+.chart-box{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:clamp(16px,3vw,24px);margin-bottom:32px;box-shadow:0 2px 8px rgba(194,24,91,.05);overflow:hidden}
+.chart-title{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:16px}
+.chart-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
 @media(max-width:520px){.two-col{grid-template-columns:1fr}}
 .imc-box{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:20px;box-shadow:0 2px 8px rgba(194,24,91,.05)}
@@ -92,15 +82,6 @@ main{max-width:960px;margin:0 auto;padding:clamp(20px,4vw,40px) clamp(12px,3vw,2
 .inj-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:#E65100;font-weight:600;margin-bottom:6px}
 .inj-date{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,3vw,20px);color:#E65100;font-weight:700;line-height:1.2}
 .inj-days{font-size:12px;color:#E65100;margin-top:5px;opacity:.8}
-
-/* GRÁFICO SVG PESO */
-.chart-box{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:clamp(16px,3vw,24px);margin-bottom:32px;box-shadow:0 2px 8px rgba(194,24,91,.05);overflow:hidden}
-.chart-title{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:16px}
-.chart-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-svg.peso-chart{display:block;min-width:300px}
-svg.med-chart{display:block;min-width:300px}
-
-/* TABELAS */
 .tbl-wrap{background:var(--card);border:1.5px solid var(--border);border-radius:24px;overflow:hidden;margin-bottom:32px;box-shadow:0 2px 8px rgba(194,24,91,.05)}
 .tbl-hdr{background:linear-gradient(135deg,var(--rose),var(--plum));padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
 .tbl-hdr h3{font-family:'Cormorant Garamond',serif;color:#fff;font-size:16px;font-weight:600}
@@ -115,33 +96,33 @@ tbody tr.inj-row{background:#FCE4EC}
 tbody tr.inj-row td{color:var(--rose);font-weight:500}
 td{padding:8px 12px;text-align:center;font-size:11px;color:var(--ink);white-space:nowrap}
 td.obs-cell{text-align:left;font-size:10px;color:var(--plum);white-space:normal;min-width:100px}
-.vp{color:#C62828;font-weight:600}
-.vn{color:#2E7D32;font-weight:600}
+.vp{color:#C62828;font-weight:600}.vn{color:#2E7D32;font-weight:600}
 .show-more-wrap{text-align:center;padding:12px}
 .show-more-btn{background:var(--rose-l);border:1.5px solid var(--rose-m);color:var(--rose);border-radius:100px;padding:8px 20px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;transition:all .2s}
 .show-more-btn:hover{background:var(--rose-m);color:#fff}
 
-/* MEDIDAS ANALYSIS CARDS */
-.med-analysis{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:32px}
-.med-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,105,92,.05)}
-.med-card-name{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);font-weight:600;margin-bottom:6px}
-.med-card-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
-.med-card-cur{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--ink);font-weight:700;line-height:1}
-.med-card-ini{font-size:10px;color:var(--muted);margin-top:2px}
-.med-diff{font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px}
-.med-diff.good{background:#E8F5E9;color:#2E7D32}
-.med-diff.bad{background:#FFEBEE;color:#C62828}
-.med-diff.zero{background:#F5F5F5;color:#888}
-.med-bar-track{background:#E0F2F1;border-radius:100px;height:5px;overflow:hidden}
-.med-bar-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--teal),#00BFA5);transition:width 1s ease}
+/* CORPO SVG */
+.body-section{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:clamp(16px,3vw,24px);margin-bottom:32px;box-shadow:0 2px 8px rgba(194,24,91,.05)}
+.body-section-title{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:16px}
+.body-wrap{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.body-svg-wrap{flex:0 0 auto;display:flex;justify-content:center}
+.body-legend{flex:1;min-width:200px;display:flex;flex-direction:column;gap:10px;padding-top:8px}
+.legend-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border-radius:12px;border:1px solid var(--border)}
+.legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.legend-info{flex:1}
+.legend-name{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600}
+.legend-val{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);font-weight:700;line-height:1}
+.legend-diff{font-size:10px;margin-top:1px}
+.legend-diff.good{color:#2E7D32}
+.legend-diff.bad{color:#C62828}
+.legend-diff.zero{color:var(--muted)}
+
 .med-hdr-teal{background:linear-gradient(135deg,var(--teal),#004D40)!important}
 .med-thead tr{background:var(--teal-l)!important}
 .med-thead th{color:var(--teal)!important}
 tbody.med-tbody tr{border-bottom:1px solid #E0F2F1}
 tbody.med-tbody tr:hover{background:#F0FBF9}
-
 footer{text-align:center;padding:20px;font-size:10px;color:var(--muted);border-top:1px solid var(--border)}
-
 @media(max-width:480px){
   .cards{grid-template-columns:1fr 1fr}
   .card-val{font-size:26px}
@@ -152,7 +133,6 @@ footer{text-align:center;padding:20px;font-size:10px;color:var(--muted);border-t
 </style>
 </head>
 <body>
-
 <div id="loading"><div class="spinner"></div><p>Carregando sua planilha…</p></div>
 <div id="err"><h3>Não foi possível carregar</h3><p>Verifique sua conexão e tente novamente.</p><code id="err-detail"></code></div>
 
@@ -189,17 +169,14 @@ footer{text-align:center;padding:20px;font-size:10px;color:var(--muted);border-t
     <div class="prog-labs"><span id="prog-ini-lbl">Início</span><span>Meta: 57 kg</span></div>
   </div>
 
-  <!-- ANÁLISES DE MÉDIA -->
-  <div class="s-title">📈 Análises</div>
+  <div class="s-title">📈 Análises de Tendência</div>
   <div class="stats-row" id="stats-row"></div>
 
-  <!-- GRÁFICO PESO -->
   <div class="chart-box">
     <div class="chart-title">📉 Evolução do Peso</div>
     <div class="chart-wrap"><canvas id="peso-canvas" height="180"></canvas></div>
   </div>
 
-  <!-- IMC + INJEÇÃO -->
   <div class="two-col">
     <div class="imc-box">
       <div class="imc-ttl">🩺 IMC Atual</div>
@@ -222,7 +199,6 @@ footer{text-align:center;padding:20px;font-size:10px;color:var(--muted);border-t
     </div>
   </div>
 
-  <!-- TABELA PESOS -->
   <div class="s-title">📋 Registro de Peso</div>
   <div class="tbl-wrap">
     <div class="tbl-hdr"><h3>Acompanhamento Diário</h3><span class="badge" id="badge-pesos">—</span></div>
@@ -235,13 +211,70 @@ footer{text-align:center;padding:20px;font-size:10px;color:var(--muted);border-t
     </div>
   </div>
 
-  <!-- ANÁLISE MEDIDAS -->
-  <div class="s-title">📐 Análise das Medidas</div>
-  <div class="med-analysis" id="med-analysis"></div>
+  <!-- MAPA DO CORPO -->
+  <div class="s-title">📐 Mapa Corporal</div>
+  <div class="body-section">
+    <div class="body-section-title">Medidas em destaque</div>
+    <div class="body-wrap">
+      <div class="body-svg-wrap">
+        <svg id="body-svg" width="180" height="420" viewBox="0 0 180 420" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cabeça -->
+          <ellipse cx="90" cy="32" rx="22" ry="26" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
+          <!-- Pescoço -->
+          <rect x="82" y="54" width="16" height="16" rx="4" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
+          <!-- Tronco -->
+          <path d="M55,70 Q45,80 43,130 Q41,175 48,200 Q55,220 90,222 Q125,220 132,200 Q139,175 137,130 Q135,80 125,70 Z" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5" id="body-torso"/>
+          <!-- Braço esquerdo -->
+          <path d="M55,75 Q38,85 33,120 Q30,145 34,175 Q37,190 43,192" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5" fill-rule="nonzero" id="body-arm-l"/>
+          <!-- Mão esquerda -->
+          <ellipse cx="42" cy="196" rx="8" ry="11" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
+          <!-- Braço direito -->
+          <path d="M125,75 Q142,85 147,120 Q150,145 146,175 Q143,190 137,192" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5" id="body-arm-r"/>
+          <!-- Mão direita -->
+          <ellipse cx="138" cy="196" rx="8" ry="11" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
+          <!-- Quadril -->
+          <path d="M48,200 Q42,210 44,230 Q48,245 90,248 Q132,245 136,230 Q138,210 132,200 Z" fill="#F8E8F2" stroke="#C2185B" stroke-width="1.5" id="body-hip"/>
+          <!-- Coxa esquerda -->
+          <path d="M56,240 Q48,260 47,295 Q46,330 52,355 Q56,368 65,370" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5" id="body-thigh-l"/>
+          <!-- Coxa direita -->
+          <path d="M124,240 Q132,260 133,295 Q134,330 128,355 Q124,368 115,370" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5" id="body-thigh-r"/>
+          <!-- Perna esquerda -->
+          <path d="M52,355 Q50,370 50,385 Q50,395 58,398" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
+          <!-- Pé esquerdo -->
+          <ellipse cx="60" cy="402" rx="14" ry="8" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
+          <!-- Perna direita -->
+          <path d="M128,355 Q130,370 130,385 Q130,395 122,398" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
+          <!-- Pé direito -->
+          <ellipse cx="120" cy="402" rx="14" ry="8" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
+          <!-- Linhas de medida (pontilhadas) -->
+          <!-- Busto -->
+          <line x1="43" y1="105" x2="137" y2="105" stroke="#C2185B" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+          <!-- Cintura -->
+          <line x1="44" y1="145" x2="136" y2="145" stroke="#E91E8C" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+          <!-- Abdomen -->
+          <line x1="44" y1="170" x2="136" y2="170" stroke="#9C27B0" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+          <!-- Quadril -->
+          <line x1="44" y1="225" x2="136" y2="225" stroke="#FF5722" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+          <!-- Pontos de medida -->
+          <circle id="pt-busto"    cx="90" cy="105" r="5" fill="#C2185B" opacity="0.9"/>
+          <circle id="pt-cintura"  cx="90" cy="145" r="5" fill="#E91E8C" opacity="0.9"/>
+          <circle id="pt-abdomen"  cx="90" cy="170" r="5" fill="#9C27B0" opacity="0.9"/>
+          <circle id="pt-quadril"  cx="90" cy="225" r="5" fill="#FF5722" opacity="0.9"/>
+          <circle id="pt-bracod"   cx="33"  cy="130" r="4" fill="#00695C" opacity="0.9"/>
+          <circle id="pt-bracoe"   cx="147" cy="130" r="4" fill="#00695C" opacity="0.9"/>
+          <circle id="pt-coxad"    cx="56"  cy="295" r="4" fill="#E65100" opacity="0.9"/>
+          <circle id="pt-coxae"    cx="124" cy="295" r="4" fill="#E65100" opacity="0.9"/>
+        </svg>
+      </div>
+      <div class="body-legend" id="body-legend">
+        <p style="font-size:12px;color:var(--muted)">Preencha as medidas na planilha para ver aqui.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- GRÁFICO MEDIDAS -->
   <div class="chart-box" id="med-chart-box" style="display:none">
-    <div class="chart-title">📐 Evolução das Medidas</div>
+    <div class="chart-title">📐 Evolução das Medidas (cm)</div>
     <div class="chart-wrap"><canvas id="med-canvas" height="200"></canvas></div>
   </div>
 
@@ -278,171 +311,162 @@ const nextThur = () => {
 };
 const medKeys   = ['busto','bracoDireito','bracoEsquerdo','cintura','abdomen','quadril','coxaDireita','coxaEsquerda'];
 const medLabels = ['Busto','Braço D.','Braço E.','Cintura','Abdômen','Quadril','Coxa D.','Coxa E.'];
-const medColors = ['#E91E8C','#9C27B0','#673AB7','#00695C','#0288D1','#E65100','#388E3C','#C62828'];
+const medColors = ['#C2185B','#00695C','#00695C','#E91E8C','#9C27B0','#FF5722','#E65100','#E65100'];
+const medDots   = ['pt-busto','pt-bracod','pt-bracoe','pt-cintura','pt-abdomen','pt-quadril','pt-coxad','pt-coxae'];
 const sem = ['1ª','2ª','3ª','4ª','5ª','6ª','7ª','8ª','9ª','10ª','11ª','12ª','13ª','14ª','15ª'];
 
-// ── CANVAS CHART (sem lib) ──────────────────────────────────
+// ── CANVAS CHARTS ──
 function desenharGraficoPeso(canvas, dados) {
-  const dpr = window.devicePixelRatio || 1;
-  const W = canvas.parentElement.clientWidth || 600;
+  const dpr = window.devicePixelRatio||1;
+  const W = Math.max(canvas.parentElement.clientWidth||400, 320);
   const H = 180;
-  canvas.width  = W * dpr;
-  canvas.height = H * dpr;
-  canvas.style.width  = W + 'px';
-  canvas.style.height = H + 'px';
-  const ctx = canvas.getContext('2d');
-  ctx.scale(dpr, dpr);
-
-  const pad = {t:20,r:20,b:36,l:44};
-  const cW = W - pad.l - pad.r;
-  const cH = H - pad.t - pad.b;
-
-  const vals = dados.map(d=>d.y);
-  const minV = Math.min(...vals) - 0.5;
-  const maxV = Math.max(...vals) + 0.5;
-  const scaleX = i => pad.l + (i / (dados.length-1)) * cW;
-  const scaleY = v => pad.t + cH - ((v - minV) / (maxV - minV)) * cH;
-
-  // Grade
-  ctx.strokeStyle = '#F5E8F0';
-  ctx.lineWidth = 1;
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  canvas.style.width=W+'px'; canvas.style.height=H+'px';
+  const ctx=canvas.getContext('2d'); ctx.scale(dpr,dpr);
+  const pad={t:20,r:20,b:36,l:44};
+  const cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
+  const vals=dados.map(d=>d.y);
+  const minV=Math.min(...vals)-.5, maxV=Math.max(...vals)+.5;
+  const sx=i=>pad.l+(i/(dados.length-1))*cW;
+  const sy=v=>pad.t+cH-((v-minV)/(maxV-minV))*cH;
+  ctx.strokeStyle='#F5E8F0'; ctx.lineWidth=1;
   for(let i=0;i<=4;i++){
-    const y = pad.t + (i/4)*cH;
+    const y=pad.t+(i/4)*cH;
     ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(pad.l+cW,y); ctx.stroke();
-    const v = maxV - (i/4)*(maxV-minV);
-    ctx.fillStyle = '#B08090'; ctx.font = '9px DM Sans'; ctx.textAlign = 'right';
-    ctx.fillText(v.toFixed(1), pad.l-6, y+3);
+    const v=maxV-(i/4)*(maxV-minV);
+    ctx.fillStyle='#B08090'; ctx.font='9px DM Sans'; ctx.textAlign='right';
+    ctx.fillText(v.toFixed(1),pad.l-6,y+3);
   }
-
-  // Área gradiente
-  const grad = ctx.createLinearGradient(0, pad.t, 0, pad.t+cH);
-  grad.addColorStop(0, 'rgba(194,24,91,0.2)');
-  grad.addColorStop(1, 'rgba(194,24,91,0)');
-  ctx.beginPath();
-  ctx.moveTo(scaleX(0), scaleY(dados[0].y));
-  dados.forEach((d,i) => { if(i>0) ctx.lineTo(scaleX(i), scaleY(d.y)); });
-  ctx.lineTo(scaleX(dados.length-1), pad.t+cH);
-  ctx.lineTo(scaleX(0), pad.t+cH);
-  ctx.closePath();
-  ctx.fillStyle = grad; ctx.fill();
-
-  // Linha
-  ctx.beginPath();
-  ctx.strokeStyle = '#C2185B'; ctx.lineWidth = 2.5;
-  ctx.lineJoin = 'round'; ctx.lineCap = 'round';
-  dados.forEach((d,i) => { i===0 ? ctx.moveTo(scaleX(i),scaleY(d.y)) : ctx.lineTo(scaleX(i),scaleY(d.y)); });
+  const grad=ctx.createLinearGradient(0,pad.t,0,pad.t+cH);
+  grad.addColorStop(0,'rgba(194,24,91,0.18)'); grad.addColorStop(1,'rgba(194,24,91,0)');
+  ctx.beginPath(); ctx.moveTo(sx(0),sy(dados[0].y));
+  dados.forEach((d,i)=>{ if(i>0) ctx.lineTo(sx(i),sy(d.y)); });
+  ctx.lineTo(sx(dados.length-1),pad.t+cH); ctx.lineTo(sx(0),pad.t+cH);
+  ctx.closePath(); ctx.fillStyle=grad; ctx.fill();
+  ctx.beginPath(); ctx.strokeStyle='#C2185B'; ctx.lineWidth=2.5;
+  ctx.lineJoin='round'; ctx.lineCap='round';
+  dados.forEach((d,i)=>{ i===0?ctx.moveTo(sx(i),sy(d.y)):ctx.lineTo(sx(i),sy(d.y)); });
   ctx.stroke();
-
-  // Pontos + labels
-  dados.forEach((d,i) => {
-    const x = scaleX(i), y = scaleY(d.y);
+  dados.forEach((d,i)=>{
+    const x=sx(i),y=sy(d.y);
     ctx.beginPath(); ctx.arc(x,y,3.5,0,Math.PI*2);
     ctx.fillStyle='#fff'; ctx.fill();
     ctx.strokeStyle='#C2185B'; ctx.lineWidth=2; ctx.stroke();
-    // Label eixo X a cada 2 pontos
-    if(i%2===0 || i===dados.length-1){
+    if(i%2===0||i===dados.length-1){
       ctx.fillStyle='#B08090'; ctx.font='9px DM Sans'; ctx.textAlign='center';
-      ctx.fillText(d.x, x, H-pad.b+14);
+      ctx.fillText(d.x,x,H-pad.b+14);
     }
   });
-  // Meta
-  if(57 >= minV && 57 <= maxV){
-    const yMeta = scaleY(57);
-    ctx.setLineDash([4,3]); ctx.strokeStyle='#E91E8C'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(pad.l,yMeta); ctx.lineTo(pad.l+cW,yMeta); ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.fillStyle='#E91E8C'; ctx.font='9px DM Sans'; ctx.textAlign='left';
-    ctx.fillText('meta 57', pad.l+4, yMeta-3);
+  if(57>=minV&&57<=maxV){
+    const yM=sy(57); ctx.setLineDash([4,3]); ctx.strokeStyle='#E91E8C'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(pad.l,yM); ctx.lineTo(pad.l+cW,yM); ctx.stroke();
+    ctx.setLineDash([]); ctx.fillStyle='#E91E8C'; ctx.font='9px DM Sans'; ctx.textAlign='left';
+    ctx.fillText('meta 57',pad.l+4,yM-3);
   }
 }
 
 function desenharGraficoMedidas(canvas, medidas) {
-  const dpr = window.devicePixelRatio || 1;
-  const W = canvas.parentElement.clientWidth || 600;
-  const H = 200;
-  canvas.width  = W * dpr;
-  canvas.height = H * dpr;
-  canvas.style.width  = W + 'px';
-  canvas.style.height = H + 'px';
-  const ctx = canvas.getContext('2d');
-  ctx.scale(dpr, dpr);
+  const dpr = window.devicePixelRatio||1;
+  const W = Math.max(canvas.parentElement.clientWidth||400, 320);
+  const H = 220;
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  canvas.style.width=W+'px'; canvas.style.height=H+'px';
+  const ctx=canvas.getContext('2d'); ctx.scale(dpr,dpr);
+  const pad={t:20,r:20,b:36,l:48};
+  const cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
 
-  const pad = {t:20,r:100,b:36,l:44};
-  const cW = W - pad.l - pad.r;
-  const cH = H - pad.t - pad.b;
-
-  // Normaliza cada medida como % do valor inicial
-  const series = medKeys.map((key, ki) => {
-    const pts = medidas.map(m => m[key]).filter(v=>v!=null);
-    if(pts.length < 2) return null;
-    const ini = pts[0];
+  // Cada série = valores reais em cm
+  const series = medKeys.map((key,ki)=>{
     const rows = medidas.filter(m=>m[key]!=null);
-    return { label: medLabels[ki], color: medColors[ki],
-      pts: rows.map((m,i) => ({ x: i, y: (m[key]/ini)*100 })) };
+    if(rows.length<2) return null;
+    return { label:medLabels[ki], color:medColors[ki], pts:rows.map((m,i)=>({x:i,y:m[key]})) };
   }).filter(Boolean);
+  if(series.length===0) return;
 
-  if(series.length === 0) return;
-
+  const allVals = series.flatMap(s=>s.pts.map(p=>p.y));
+  const minV = Math.min(...allVals)-2, maxV = Math.max(...allVals)+2;
   const nPts = Math.max(...series.map(s=>s.pts.length));
-  const scaleX = i => pad.l + (nPts <= 1 ? cW/2 : (i/(nPts-1))*cW);
-  const scaleY = v => pad.t + cH - ((v - 88) / (106 - 88)) * cH;
+  const sx = i=>pad.l+(nPts<=1?cW/2:(i/(nPts-1))*cW);
+  const sy = v=>pad.t+cH-((v-minV)/(maxV-minV))*cH;
 
-  // Grade
-  ctx.strokeStyle = '#E8F5E9'; ctx.lineWidth = 1;
+  ctx.strokeStyle='#F0F0F0'; ctx.lineWidth=1;
   for(let i=0;i<=4;i++){
-    const y = pad.t + (i/4)*cH;
+    const y=pad.t+(i/4)*cH;
     ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(pad.l+cW,y); ctx.stroke();
-    const v = 106 - (i/4)*(106-88);
+    const v=maxV-(i/4)*(maxV-minV);
     ctx.fillStyle='#aaa'; ctx.font='9px DM Sans'; ctx.textAlign='right';
-    ctx.fillText(v.toFixed(0)+'%', pad.l-4, y+3);
+    ctx.fillText(v.toFixed(0)+'cm',pad.l-4,y+3);
   }
-
-  // Linha 100%
-  const y100 = scaleY(100);
-  ctx.setLineDash([3,2]); ctx.strokeStyle='#ccc'; ctx.lineWidth=1;
-  ctx.beginPath(); ctx.moveTo(pad.l,y100); ctx.lineTo(pad.l+cW,y100); ctx.stroke();
-  ctx.setLineDash([]);
-  ctx.fillStyle='#aaa'; ctx.font='9px DM Sans'; ctx.textAlign='left';
-  ctx.fillText('início', pad.l+4, y100-3);
-
-  // Series
-  series.forEach(s => {
+  series.forEach(s=>{
     ctx.beginPath(); ctx.strokeStyle=s.color; ctx.lineWidth=2;
     ctx.lineJoin='round'; ctx.lineCap='round';
-    s.pts.forEach((p,i) => i===0 ? ctx.moveTo(scaleX(p.x),scaleY(p.y)) : ctx.lineTo(scaleX(p.x),scaleY(p.y)));
+    s.pts.forEach((p,i)=>i===0?ctx.moveTo(sx(p.x),sy(p.y)):ctx.lineTo(sx(p.x),sy(p.y)));
     ctx.stroke();
-    // último ponto
-    const last = s.pts[s.pts.length-1];
-    ctx.beginPath(); ctx.arc(scaleX(last.x),scaleY(last.y),3,0,Math.PI*2);
-    ctx.fillStyle=s.color; ctx.fill();
-    // legenda
-    const li = series.indexOf(s);
-    ctx.fillStyle=s.color; ctx.font='9px DM Sans'; ctx.textAlign='left';
-    ctx.fillText(s.label, W-pad.r+8, scaleY(last.y)+3);
+    s.pts.forEach(p=>{
+      ctx.beginPath(); ctx.arc(sx(p.x),sy(p.y),3,0,Math.PI*2);
+      ctx.fillStyle=s.color; ctx.fill();
+    });
+    const last=s.pts[s.pts.length-1];
+    ctx.fillStyle=s.color; ctx.font='bold 9px DM Sans'; ctx.textAlign='left';
+    ctx.fillText(s.label+' '+last.y+'cm', sx(last.x)+6, sy(last.y)+3);
   });
-
-  // Eixo X semanas
   for(let i=0;i<nPts;i++){
     ctx.fillStyle='#aaa'; ctx.font='9px DM Sans'; ctx.textAlign='center';
-    ctx.fillText('S'+(i+1), scaleX(i), H-pad.b+14);
+    ctx.fillText('S'+(i+1),sx(i),H-pad.b+14);
   }
 }
 
-// ── PESOS TABLE ──────────────────────────────────────────
-let todosPesos = [], mostrandoTudo = false;
+// ── MAPA CORPO ──
+function renderCorpo(medidas) {
+  const leg = $('body-legend'); leg.innerHTML='';
+  const comDados = medidas.filter(m=>medKeys.some(k=>m[k]!=null));
+  if(comDados.length===0){
+    leg.innerHTML='<p style="font-size:12px;color:var(--muted)">Preencha as medidas na planilha para ver aqui.</p>';
+    return;
+  }
+  const last = comDados[comDados.length-1];
+  const first = comDados[0];
+  const bodyColors = {
+    busto:'#C2185B', bracoDireito:'#00695C', bracoEsquerdo:'#00695C',
+    cintura:'#E91E8C', abdomen:'#9C27B0', quadril:'#FF5722',
+    coxaDireita:'#E65100', coxaEsquerda:'#E65100'
+  };
+  medKeys.forEach((key,ki)=>{
+    const cur = last[key], ini = first[key];
+    if(cur==null) return;
+    const diff = ini!=null ? cur-ini : null;
+    const dcls = diff==null?'zero':diff<0?'good':diff>0?'bad':'zero';
+    const dtxt = diff==null?'—': (diff===0?'sem alteração': (diff<0?diff.toFixed(1):'+'+diff.toFixed(1))+' cm desde o início');
+    const item = document.createElement('div');
+    item.className='legend-item';
+    item.innerHTML=`<div class="legend-dot" style="background:${bodyColors[key]}"></div>
+      <div class="legend-info">
+        <div class="legend-name">${medLabels[ki]}</div>
+        <div class="legend-val">${cur} <small style="font-size:13px;font-weight:400">cm</small></div>
+        <div class="legend-diff ${dcls}">${dtxt}</div>
+      </div>`;
+    leg.appendChild(item);
+    // Pulsa o ponto no corpo
+    const dot = $(medDots[ki]);
+    if(dot) {
+      dot.setAttribute('r', diff!=null&&diff<0?'7':'5');
+      dot.setAttribute('opacity', diff!=null&&diff<0?'1':'.9');
+    }
+  });
+}
 
-function renderPesos(rows, all) {
-  const preench = rows.filter(r=>r.peso!=null);
-  const prox    = rows.filter(r=>r.peso==null).slice(0,3);
-  const exibir  = all ? rows : [...preench.slice(-7), ...prox];
-  const tbody = $('tbody-pesos'); tbody.innerHTML = '';
-  exibir.forEach(row => {
-    const isInj = row.obs && row.obs.includes('APLICAÇÃO');
-    const tr = document.createElement('tr');
+// ── PESOS TABLE ──
+let todosPesos=[], mostrandoTudo=false;
+function renderPesos(rows,all){
+  const preench=rows.filter(r=>r.peso!=null);
+  const prox=rows.filter(r=>r.peso==null).slice(0,3);
+  const exibir=all?rows:[...preench.slice(-7),...prox];
+  const tbody=$('tbody-pesos'); tbody.innerHTML='';
+  exibir.forEach(row=>{
+    const isInj=row.obs&&row.obs.includes('APLICAÇÃO');
+    const tr=document.createElement('tr');
     if(isInj) tr.classList.add('inj-row');
-    tr.innerHTML = `
-      <td>${fmtD(row.data)}</td>
-      <td style="font-size:10px">${row.dia}</td>
+    tr.innerHTML=`<td>${fmtD(row.data)}</td><td style="font-size:10px">${row.dia}</td>
       <td><strong>${row.peso!=null?row.peso.toFixed(1):'—'}</strong></td>
       <td class="${varCls(row.varDia)}">${fmtVar(row.varDia)}</td>
       <td class="${varCls(row.varInicio)}">${fmtVar(row.varInicio)}</td>
@@ -451,181 +475,122 @@ function renderPesos(rows, all) {
       <td class="obs-cell">${row.obs||''}</td>`;
     tbody.appendChild(tr);
   });
-  txt('badge-pesos', preench.length+' pesos registrados');
-  const wrap = $('show-more-wrap'), btn = $('show-more-btn');
-  if(preench.length > 7){ wrap.style.display='block'; btn.textContent = all?'Ver menos ▲':`Ver todos os ${rows.length} dias ▼`; }
+  txt('badge-pesos',preench.length+' pesos registrados');
+  const wrap=$('show-more-wrap'),btn=$('show-more-btn');
+  if(preench.length>7){wrap.style.display='block';btn.textContent=all?'Ver menos ▲':`Ver todos os ${rows.length} dias ▼`;}
   else wrap.style.display='none';
 }
-function togglePesos(){ mostrandoTudo=!mostrandoTudo; renderPesos(todosPesos,mostrandoTudo); }
+function togglePesos(){mostrandoTudo=!mostrandoTudo;renderPesos(todosPesos,mostrandoTudo);}
 
-// ── RENDER PRINCIPAL ─────────────────────────────────────
-function render(data) {
-  const {info, diario, medidas} = data;
-
-  txt('h-nome', info.nome||'Luiza Ribeiro de Melo');
-  txt('h-alt', info.altura?String(info.altura).replace('.',',')+'m':'1,60m');
-
-  const dtI = new Date(info.dataInicio);
-  txt('h-inicio', dtI.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}));
-  const diasTotal = Math.floor((new Date()-dtI)/86400000);
-  txt('h-dias', diasTotal+' dias');
-
-  const nxt = nextThur();
-  txt('h-prox', fmtDLong(nxt));
-  txt('inj-date', fmtDFull(nxt));
-  const di = Math.round((nxt-new Date())/86400000);
-  txt('inj-days', di===0?'🎉 Hoje é dia de aplicação!':di===1?'Amanhã!':`Em ${di} dias · TIRZEC 2,5mg`);
-
-  const pesos  = diario.filter(r=>r.peso!=null).map(r=>r.peso);
-  const datas  = diario.filter(r=>r.peso!=null).map(r=>r.data);
-  const pA     = pesos.length>0 ? pesos[pesos.length-1] : null;
-  const pI     = info.pesoInicial>0 ? info.pesoInicial : (pesos.length>0?pesos[0]:null);
-  const meta   = info.meta||57;
-
-  if(pI) txt('c-pi', pI.toFixed(1));
-  if(pA) txt('c-pa', pA.toFixed(1));
-
-  if(pI && pA) {
-    const perd = pI-pA;
-    txt('c-perd', perd.toFixed(1));
-    txt('c-pct', (perd/pI*100).toFixed(1)+'%');
-    const falt = pA-meta;
-    txt('c-faltam', falt>0?`Faltam ${falt.toFixed(1)} kg`:'🎉 Meta!');
-    const pct = Math.min(100,Math.max(0,(perd/(pI-meta))*100));
-    txt('prog-pct', pct.toFixed(0)+'%');
-    txt('prog-desc', `${pI.toFixed(1)} → ${pA.toFixed(1)} kg → meta ${meta} kg`);
-    txt('prog-ini-lbl', `Início: ${pI.toFixed(1)} kg`);
+// ── RENDER ──
+function render(data){
+  const {info,diario,medidas}=data;
+  txt('h-nome',info.nome||'Luiza');
+  txt('h-alt',info.altura?String(info.altura).replace('.',',')+'m':'1,60m');
+  const dtI=new Date(info.dataInicio);
+  txt('h-inicio',dtI.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}));
+  const diasTotal=Math.floor((new Date()-dtI)/86400000);
+  txt('h-dias',diasTotal+' dias');
+  const nxt=nextThur();
+  txt('h-prox',fmtDLong(nxt));
+  txt('inj-date',fmtDFull(nxt));
+  const di=Math.round((nxt-new Date())/86400000);
+  txt('inj-days',di===0?'🎉 Hoje é dia de aplicação!':di===1?'Amanhã!':`Em ${di} dias · TIRZEC 2,5mg`);
+  const pesos=diario.filter(r=>r.peso!=null).map(r=>r.peso);
+  const pA=pesos.length>0?pesos[pesos.length-1]:null;
+  const pI=info.pesoInicial>0?info.pesoInicial:(pesos.length>0?pesos[0]:null);
+  const meta=info.meta||57;
+  if(pI) txt('c-pi',pI.toFixed(1));
+  if(pA) txt('c-pa',pA.toFixed(1));
+  if(pI&&pA){
+    const perd=pI-pA;
+    txt('c-perd',perd.toFixed(1));
+    txt('c-pct',(perd/pI*100).toFixed(1)+'%');
+    const falt=pA-meta;
+    txt('c-faltam',falt>0?`Faltam ${falt.toFixed(1)} kg`:'🎉 Meta!');
+    const pct=Math.min(100,Math.max(0,(perd/(pI-meta))*100));
+    txt('prog-pct',pct.toFixed(0)+'%');
+    txt('prog-desc',`${pI.toFixed(1)} → ${pA.toFixed(1)} kg → meta ${meta} kg`);
+    txt('prog-ini-lbl',`Início: ${pI.toFixed(1)} kg`);
     setTimeout(()=>{ $('prog-fill').style.width=pct+'%'; },400);
-    const imc = pA/(info.altura*info.altura);
-    const cls = imcInfo(imc);
-    txt('imc-val', imc.toFixed(2));
-    $('imc-val').style.color = cls.c;
-    txt('imc-lbl', cls.l);
+    const imc=pA/(info.altura*info.altura);
+    const cls=imcInfo(imc);
+    txt('imc-val',imc.toFixed(2)); $('imc-val').style.color=cls.c; txt('imc-lbl',cls.l);
   }
 
-  // ── ANÁLISES ──
-  const statsRow = $('stats-row');
-  statsRow.innerHTML = '';
-  if(pesos.length >= 2) {
-    // Média por dia
-    const diasDecorridos = Math.max(1, diasTotal);
-    const perdTotal = pI - pA;
-    const mediaDia = perdTotal / diasDecorridos;
-    // Média por semana
-    const mediasSemana = [];
-    for(let i=7; i<=pesos.length; i+=7) {
-      const s = pesos.slice(i-7,i);
-      mediasSemana.push(s[0]-s[s.length-1]);
-    }
-    const mediaSem = mediasSemana.length>0 ? mediasSemana.reduce((a,b)=>a+b,0)/mediasSemana.length : (perdTotal/(diasDecorridos/7));
-    // Projeção meta
-    const diasParaMeta = mediaDia > 0 ? Math.ceil((pA-meta)/mediaDia) : null;
-    const dataMeta = diasParaMeta ? new Date(Date.now()+diasParaMeta*86400000) : null;
-    // Semana atual
-    const pesosUltSemana = pesos.slice(-7);
-    const perdSemanaAtual = pesosUltSemana.length>=2 ? pesosUltSemana[0]-pesosUltSemana[pesosUltSemana.length-1] : null;
-
-    const items = [
-      {ico:'📅',lbl:'Média por Dia',val: mediaDia>0 ? '-'+mediaDia.toFixed(2)+' kg' : '0 kg', sub:'taxa de perda diária'},
-      {ico:'📆',lbl:'Média por Semana',val: mediaSem>0 ? '-'+mediaSem.toFixed(2)+' kg' : '0 kg', sub:'taxa semanal estimada'},
-      {ico:'📅',lbl:'Esta Semana',val: perdSemanaAtual!=null ? (perdSemanaAtual>=0?'-':'+')+(Math.abs(perdSemanaAtual)).toFixed(1)+' kg' : '—', sub:'últimos 7 registros'},
-      {ico:'🗓️',lbl:'Projeção da Meta',val: dataMeta ? dataMeta.toLocaleDateString('pt-BR',{month:'short',year:'numeric'}) : '—', sub: diasParaMeta ? `em ~${diasParaMeta} dias` : 'continue registrando'},
-    ];
-    items.forEach(item => {
-      const d = document.createElement('div');
-      d.className = 'stat-mini';
-      d.innerHTML = `<div class="stat-mini-lbl">${item.ico} ${item.lbl}</div><div class="stat-mini-val">${item.val}</div><div class="stat-mini-sub">${item.sub}</div>`;
+  // Análises
+  const statsRow=$('stats-row'); statsRow.innerHTML='';
+  if(pesos.length>=2){
+    const perdTotal=pI-pA;
+    const mediaDia=perdTotal/Math.max(1,diasTotal);
+    const mediasSem=[];
+    for(let i=7;i<=pesos.length;i+=7){ const s=pesos.slice(i-7,i); mediasSem.push(s[0]-s[s.length-1]); }
+    const mediaSem=mediasSem.length>0?mediasSem.reduce((a,b)=>a+b,0)/mediasSem.length:(perdTotal/(diasTotal/7));
+    const diasParaMeta=mediaDia>0?Math.ceil((pA-meta)/mediaDia):null;
+    const dataMeta=diasParaMeta?new Date(Date.now()+diasParaMeta*86400000):null;
+    const perdUltSem=pesos.length>=2?pesos[Math.max(0,pesos.length-7)]-pA:null;
+    [
+      {ico:'📅',lbl:'Média por Dia',val:mediaDia>0?'-'+mediaDia.toFixed(2)+' kg':'0 kg',sub:'taxa de perda diária'},
+      {ico:'📆',lbl:'Média por Semana',val:mediaSem>0?'-'+mediaSem.toFixed(2)+' kg':'0 kg',sub:'taxa semanal estimada'},
+      {ico:'📉',lbl:'Últimos 7 dias',val:perdUltSem!=null?(perdUltSem>=0?'-':'+')+(Math.abs(perdUltSem)).toFixed(1)+' kg':'—',sub:'variação recente'},
+      {ico:'🗓️',lbl:'Projeção da Meta',val:dataMeta?dataMeta.toLocaleDateString('pt-BR',{month:'short',year:'numeric'}):'—',sub:diasParaMeta?`em ~${diasParaMeta} dias`:'continue registrando'},
+    ].forEach(item=>{
+      const d=document.createElement('div'); d.className='stat-mini';
+      d.innerHTML=`<div class="stat-mini-lbl">${item.ico} ${item.lbl}</div><div class="stat-mini-val">${item.val}</div><div class="stat-mini-sub">${item.sub}</div>`;
       statsRow.appendChild(d);
     });
   } else {
-    statsRow.innerHTML = '<p style="color:var(--muted);font-size:13px;grid-column:1/-1">Preencha mais dias para ver as análises de tendência.</p>';
+    statsRow.innerHTML='<p style="color:var(--muted);font-size:13px;grid-column:1/-1">Preencha mais dias para ver as análises de tendência.</p>';
   }
 
-  // ── GRÁFICO PESO ──
-  if(pesos.length >= 2) {
-    const dadosGraf = diario.filter(r=>r.peso!=null).map(r=>({x:fmtD(r.data),y:r.peso}));
-    const canvas = $('peso-canvas');
-    setTimeout(()=>desenharGraficoPeso(canvas, dadosGraf), 100);
+  // Gráfico peso
+  if(pesos.length>=2){
+    const dadosG=diario.filter(r=>r.peso!=null).map(r=>({x:fmtD(r.data),y:r.peso}));
+    setTimeout(()=>desenharGraficoPeso($('peso-canvas'),dadosG),100);
   }
 
-  // ── TABELA PESOS ──
-  todosPesos = diario;
-  renderPesos(diario, false);
+  // Tabela pesos
+  todosPesos=diario; renderPesos(diario,false);
 
-  // ── ANÁLISE MEDIDAS ──
-  const medAnalysis = $('med-analysis');
-  medAnalysis.innerHTML = '';
-  const comDados = medidas.filter(m => medKeys.some(k=>m[k]!=null));
-  if(comDados.length === 0) {
-    medAnalysis.innerHTML = '<p style="color:var(--muted);font-size:13px;grid-column:1/-1">Preencha as medidas na planilha para ver a análise aqui.</p>';
-  } else {
-    medKeys.forEach((key,ki) => {
-      const vals = comDados.map(m=>m[key]).filter(v=>v!=null);
-      if(vals.length===0) return;
-      const ini = vals[0], cur = vals[vals.length-1], diff = cur-ini;
-      const pct = ini > 0 ? Math.min(100,(cur/ini)*100) : 100;
-      const dcls = diff<0?'good':diff>0?'bad':'zero';
-      const dtxt = diff===0?'=': (diff>0?'+':'')+diff.toFixed(1)+' cm';
-      const card = document.createElement('div');
-      card.className = 'med-card';
-      card.innerHTML = `
-        <div class="med-card-name">${medLabels[ki]}</div>
-        <div class="med-card-row">
-          <div><div class="med-card-cur">${cur}<small style="font-size:12px;font-weight:400"> cm</small></div>
-          <div class="med-card-ini">Início: ${ini} cm · ${vals.length} medições</div></div>
-          <div class="med-diff ${dcls}">${dtxt}</div>
-        </div>
-        <div class="med-bar-track"><div class="med-bar-fill" style="width:${pct}%"></div></div>`;
-      medAnalysis.appendChild(card);
-    });
+  // Mapa corpo
+  renderCorpo(medidas);
 
-    // Gráfico medidas
-    const medChartBox = $('med-chart-box');
-    const temSeries = medKeys.some(k => comDados.filter(m=>m[k]!=null).length >= 2);
-    if(temSeries) {
-      medChartBox.style.display = 'block';
-      setTimeout(()=>desenharGraficoMedidas($('med-canvas'), comDados), 100);
-    }
+  // Gráfico medidas
+  const comDados=medidas.filter(m=>medKeys.some(k=>m[k]!=null));
+  const temSeries=medKeys.some(k=>comDados.filter(m=>m[k]!=null).length>=2);
+  if(temSeries){
+    $('med-chart-box').style.display='block';
+    setTimeout(()=>desenharGraficoMedidas($('med-canvas'),comDados),100);
   }
 
-  // ── TABELA MEDIDAS ──
-  const tbodMed = $('tbody-med'); tbodMed.innerHTML = '';
-  medidas.forEach((row,i) => {
-    const prev = i>0?medidas[i-1]:null;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td style="font-weight:600;color:var(--teal)">${fmtD(row.data)}<br><span style="font-size:9px;color:var(--muted)">${sem[i]} sem.</span></td>
+  // Tabela medidas
+  const tbodMed=$('tbody-med'); tbodMed.innerHTML='';
+  medidas.forEach((row,i)=>{
+    const prev=i>0?medidas[i-1]:null;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td style="font-weight:600;color:var(--teal)">${fmtD(row.data)}<br><span style="font-size:9px;color:var(--muted)">${sem[i]} sem.</span></td>
       ${medKeys.map(k=>{
         const v=row[k];
         if(v==null) return '<td><span style="color:#ddd">—</span></td>';
-        const pv = prev?prev[k]:null;
-        const d = pv!=null?v-pv:null;
-        const ds = d!=null?`<span style="font-size:9px;${d<0?'color:#2E7D32':d>0?'color:#C62828':'color:#999'}">${d===0?'=':d<0?d.toFixed(1):'+'+d.toFixed(1)}</span>`:'';
+        const pv=prev?prev[k]:null;
+        const d=pv!=null?v-pv:null;
+        const ds=d!=null?`<span style="font-size:9px;${d<0?'color:#2E7D32':d>0?'color:#C62828':'color:#999'}">${d===0?'=':d<0?d.toFixed(1):'+'+d.toFixed(1)}</span>`:'';
         return `<td>${v} ${ds}</td>`;
       }).join('')}`;
     tbodMed.appendChild(tr);
   });
 
-  txt('last-up', new Date().toLocaleString('pt-BR'));
+  txt('last-up',new Date().toLocaleString('pt-BR'));
   $('loading').classList.add('out');
 }
 
-// ── JSONP ────────────────────────────────────────────────
-window.__cb__ = function(data) {
-  clearTimeout(window.__to__);
-  $('err').style.display = 'none';
-  render(data);
-};
-function carregar() {
-  $('loading').classList.remove('out');
-  $('err').style.display = 'none';
+// ── JSONP ──
+window.__cb__=function(data){ clearTimeout(window.__to__); $('err').style.display='none'; render(data); };
+function carregar(){
+  $('loading').classList.remove('out'); $('err').style.display='none';
   const old=$('jsonp-s'); if(old) old.remove();
-  window.__to__ = setTimeout(()=>{
-    $('loading').classList.add('out');
-    $('err').style.display='block';
-    $('err-detail').textContent='Tempo esgotado.';
-  },12000);
-  const s=document.createElement('script');
-  s.id='jsonp-s';
+  window.__to__=setTimeout(()=>{ $('loading').classList.add('out'); $('err').style.display='block'; $('err-detail').textContent='Tempo esgotado.'; },12000);
+  const s=document.createElement('script'); s.id='jsonp-s';
   s.src=URL_SCRIPT+'?callback=__cb__&t='+Date.now();
   s.onerror=()=>{ clearTimeout(window.__to__); $('loading').classList.add('out'); $('err').style.display='block'; $('err-detail').textContent='Erro ao carregar. Verifique o Apps Script.'; };
   document.body.appendChild(s);
