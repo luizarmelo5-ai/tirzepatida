@@ -104,18 +104,23 @@ td.obs-cell{text-align:left;font-size:10px;color:var(--plum);white-space:normal;
 /* CORPO SVG */
 .body-section{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:clamp(16px,3vw,24px);margin-bottom:32px;box-shadow:0 2px 8px rgba(194,24,91,.05)}
 .body-section-title{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:16px}
-.body-wrap{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
-.body-svg-wrap{flex:0 0 auto;display:flex;justify-content:center}
-.body-legend{flex:1;min-width:200px;display:flex;flex-direction:column;gap:10px;padding-top:8px}
-.legend-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border-radius:12px;border:1px solid var(--border)}
-.legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
-.legend-info{flex:1}
-.legend-name{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600}
-.legend-val{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);font-weight:700;line-height:1}
-.legend-diff{font-size:10px;margin-top:1px}
-.legend-diff.good{color:#2E7D32}
-.legend-diff.bad{color:#C62828}
-.legend-diff.zero{color:var(--muted)}
+.body-map-wrap{display:flex;align-items:flex-start;justify-content:center;gap:0;max-width:560px;margin:0 auto;flex-wrap:wrap}
+.bm-col{display:flex;flex-direction:column;gap:8px;width:130px;flex-shrink:0}
+.bm-col-left{align-items:flex-end}
+.bm-col-right{align-items:flex-start}
+.bm-col-body{flex:0 0 auto;display:flex;justify-content:center;padding:0 4px}
+.bm-tag{background:#fff;border-radius:8px;padding:6px 10px;border:1px solid var(--border);box-shadow:0 1px 6px rgba(194,24,91,.07);white-space:nowrap}
+.bm-tag-name{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#9B4070;font-weight:600}
+.bm-tag-val{font-size:14px;font-weight:700;line-height:1.2;margin-top:1px}
+.bm-tag-diff{font-size:9px;margin-top:1px}
+.bm-spacer{flex-shrink:0}
+@media(max-width:480px){
+  .body-map-wrap{gap:6px}
+  .bm-col{width:96px}
+  .bm-tag{padding:5px 7px}
+  .bm-tag-name{font-size:8px}
+  .bm-tag-val{font-size:12px}
+}
 
 .med-hdr-teal{background:linear-gradient(135deg,var(--teal),#004D40)!important}
 .med-thead tr{background:var(--teal-l)!important}
@@ -215,60 +220,54 @@ footer{text-align:center;padding:20px;font-size:10px;color:var(--muted);border-t
   <div class="s-title">📐 Mapa Corporal</div>
   <div class="body-section">
     <div class="body-section-title">Medidas em destaque</div>
-    <div class="body-wrap">
-      <div class="body-svg-wrap">
-        <svg id="body-svg" width="180" height="420" viewBox="0 0 180 420" xmlns="http://www.w3.org/2000/svg">
-          <!-- Cabeça -->
-          <ellipse cx="90" cy="32" rx="22" ry="26" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
-          <!-- Pescoço -->
-          <rect x="82" y="54" width="16" height="16" rx="4" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
-          <!-- Tronco -->
-          <path d="M55,70 Q45,80 43,130 Q41,175 48,200 Q55,220 90,222 Q125,220 132,200 Q139,175 137,130 Q135,80 125,70 Z" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5" id="body-torso"/>
-          <!-- Braço esquerdo -->
-          <path d="M55,75 Q38,85 33,120 Q30,145 34,175 Q37,190 43,192" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5" fill-rule="nonzero" id="body-arm-l"/>
-          <!-- Mão esquerda -->
-          <ellipse cx="42" cy="196" rx="8" ry="11" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
-          <!-- Braço direito -->
-          <path d="M125,75 Q142,85 147,120 Q150,145 146,175 Q143,190 137,192" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5" id="body-arm-r"/>
-          <!-- Mão direita -->
-          <ellipse cx="138" cy="196" rx="8" ry="11" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
-          <!-- Quadril -->
-          <path d="M48,200 Q42,210 44,230 Q48,245 90,248 Q132,245 136,230 Q138,210 132,200 Z" fill="#F8E8F2" stroke="#C2185B" stroke-width="1.5" id="body-hip"/>
-          <!-- Coxa esquerda -->
-          <path d="M56,240 Q48,260 47,295 Q46,330 52,355 Q56,368 65,370" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5" id="body-thigh-l"/>
-          <!-- Coxa direita -->
-          <path d="M124,240 Q132,260 133,295 Q134,330 128,355 Q124,368 115,370" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5" id="body-thigh-r"/>
-          <!-- Perna esquerda -->
-          <path d="M52,355 Q50,370 50,385 Q50,395 58,398" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
-          <!-- Pé esquerdo -->
-          <ellipse cx="60" cy="402" rx="14" ry="8" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
-          <!-- Perna direita -->
-          <path d="M128,355 Q130,370 130,385 Q130,395 122,398" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
-          <!-- Pé direito -->
-          <ellipse cx="120" cy="402" rx="14" ry="8" fill="#FCE4EC" stroke="#C2185B" stroke-width="1.5"/>
-          <!-- Linhas de medida (pontilhadas) -->
-          <!-- Busto -->
-          <line x1="43" y1="105" x2="137" y2="105" stroke="#C2185B" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
-          <!-- Cintura -->
-          <line x1="44" y1="145" x2="136" y2="145" stroke="#E91E8C" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
-          <!-- Abdomen -->
-          <line x1="44" y1="170" x2="136" y2="170" stroke="#9C27B0" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
-          <!-- Quadril -->
-          <line x1="44" y1="225" x2="136" y2="225" stroke="#FF5722" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
-          <!-- Pontos de medida -->
-          <circle id="pt-busto"    cx="90" cy="105" r="5" fill="#C2185B" opacity="0.9"/>
-          <circle id="pt-cintura"  cx="90" cy="145" r="5" fill="#E91E8C" opacity="0.9"/>
-          <circle id="pt-abdomen"  cx="90" cy="170" r="5" fill="#9C27B0" opacity="0.9"/>
-          <circle id="pt-quadril"  cx="90" cy="225" r="5" fill="#FF5722" opacity="0.9"/>
-          <circle id="pt-bracod"   cx="33"  cy="130" r="4" fill="#00695C" opacity="0.9"/>
-          <circle id="pt-bracoe"   cx="147" cy="130" r="4" fill="#00695C" opacity="0.9"/>
-          <circle id="pt-coxad"    cx="56"  cy="295" r="4" fill="#E65100" opacity="0.9"/>
-          <circle id="pt-coxae"    cx="124" cy="295" r="4" fill="#E65100" opacity="0.9"/>
+    <div class="body-map-wrap" id="body-map-wrap">
+
+      <!-- COLUNA ESQUERDA: Braço esq + Coxa esq -->
+      <div class="bm-col bm-col-left" id="bm-col-left"></div>
+
+      <!-- SILHUETA -->
+      <div class="bm-col-body">
+        <svg width="130" viewBox="0 0 130 420" xmlns="http://www.w3.org/2000/svg">
+          <defs><style>
+            .bm-s{fill:#F9EEF1;stroke:#C2185B;stroke-width:1.3;stroke-linejoin:round}
+            .bm-ml{stroke-dasharray:3 3;stroke-width:.8;fill:none;opacity:.6}
+            .bm-md{stroke:#fff;stroke-width:1.5}
+          </style></defs>
+          <ellipse cx="65" cy="22" rx="16" ry="19" class="bm-s"/>
+          <path d="M60,40 Q60,50 62,54 L68,54 Q70,50 70,40 Z" class="bm-s"/>
+          <path d="M62,54 Q52,56 44,62 Q36,70 35,84 Q34,98 36,110 Q38,120 40,130 Q42,142 43,154 Q44,164 44,172 L86,172 Q86,164 87,154 Q88,142 90,130 Q92,120 94,110 Q96,98 95,84 Q94,70 86,62 Q78,56 68,54 Z" class="bm-s"/>
+          <path d="M44,172 Q36,176 33,188 Q30,200 32,212 Q35,224 42,232 Q52,238 65,240 Q78,238 88,232 Q95,224 98,212 Q100,200 97,188 Q94,176 86,172 Z" class="bm-s"/>
+          <path d="M35,84 Q26,90 22,104 Q18,120 19,136 Q20,150 23,160 Q25,166 28,168 Q31,162 33,152 Q34,140 34,126 Q34,112 35,98 Q35,90 35,84 Z" class="bm-s"/>
+          <ellipse cx="25" cy="172" rx="6" ry="9" class="bm-s"/>
+          <path d="M95,84 Q104,90 108,104 Q112,120 111,136 Q110,150 107,160 Q105,166 102,168 Q99,162 97,152 Q96,140 96,126 Q96,112 95,98 Q95,90 95,84 Z" class="bm-s"/>
+          <ellipse cx="105" cy="172" rx="6" ry="9" class="bm-s"/>
+          <path d="M42,232 Q34,246 32,266 Q30,286 32,304 Q34,320 38,332 Q42,340 46,344 L57,344 Q58,328 58,308 Q58,288 56,268 Q54,250 50,236 Z" class="bm-s"/>
+          <path d="M88,232 Q96,246 98,266 Q100,286 98,304 Q96,320 92,332 Q88,340 84,344 L73,344 Q72,328 72,308 Q72,288 74,268 Q76,250 80,236 Z" class="bm-s"/>
+          <path d="M46,344 Q42,358 43,372 Q44,380 48,382 L57,382 Q59,380 59,372 Q60,358 57,344 Z" class="bm-s"/>
+          <path d="M84,344 Q88,358 87,372 Q86,380 82,382 L73,382 Q71,380 71,372 Q70,358 73,344 Z" class="bm-s"/>
+          <ellipse cx="50" cy="387" rx="11" ry="5.5" class="bm-s"/>
+          <ellipse cx="80" cy="387" rx="11" ry="5.5" class="bm-s"/>
+          <line x1="34" y1="90" x2="96" y2="90" stroke="#C2185B" class="bm-ml"/>
+          <circle cx="65" cy="90" r="3.5" fill="#C2185B" class="bm-md"/>
+          <line x1="36" y1="124" x2="94" y2="124" stroke="#E91E8C" class="bm-ml"/>
+          <circle cx="65" cy="124" r="3.5" fill="#E91E8C" class="bm-md"/>
+          <line x1="38" y1="150" x2="92" y2="150" stroke="#9C27B0" class="bm-ml"/>
+          <circle cx="65" cy="150" r="3.5" fill="#9C27B0" class="bm-md"/>
+          <line x1="32" y1="214" x2="98" y2="214" stroke="#FF5722" class="bm-ml"/>
+          <circle cx="65" cy="214" r="3.5" fill="#FF5722" class="bm-md"/>
+          <line x1="16" y1="134" x2="34" y2="134" stroke="#00695C" class="bm-ml"/>
+          <circle cx="23" cy="134" r="3" fill="#00695C" class="bm-md"/>
+          <line x1="96" y1="134" x2="114" y2="134" stroke="#00695C" class="bm-ml"/>
+          <circle cx="107" cy="134" r="3" fill="#00695C" class="bm-md"/>
+          <line x1="28" y1="284" x2="44" y2="284" stroke="#E65100" class="bm-ml"/>
+          <circle cx="34" cy="284" r="3" fill="#E65100" class="bm-md"/>
+          <line x1="86" y1="284" x2="102" y2="284" stroke="#E65100" class="bm-ml"/>
+          <circle cx="96" cy="284" r="3" fill="#E65100" class="bm-md"/>
         </svg>
       </div>
-      <div class="body-legend" id="body-legend">
-        <p style="font-size:12px;color:var(--muted)">Preencha as medidas na planilha para ver aqui.</p>
-      </div>
+
+      <!-- COLUNA DIREITA: Busto, Cintura, Abdômen, Quadril, Braço dir, Coxa dir -->
+      <div class="bm-col bm-col-right" id="bm-col-right"></div>
     </div>
   </div>
 
@@ -284,6 +283,23 @@ footer{text-align:center;padding:20px;font-size:10px;color:var(--muted);border-t
     <div class="tbl-scroll"><table>
       <thead class="med-thead"><tr><th>Semana</th><th>Busto</th><th>Braço D.</th><th>Braço E.</th><th>Cintura</th><th>Abdômen</th><th>Quadril</th><th>Coxa D.</th><th>Coxa E.</th></tr></thead>
       <tbody id="tbody-med" class="med-tbody"></tbody>
+    </table></div>
+  </div>
+
+  <!-- BIOIMPEDÂNCIA -->
+  <div class="s-title">🧬 Composição Corporal (Bioimpedância)</div>
+  <div class="stats-row" id="bio-cards"></div>
+
+  <div class="chart-box" id="bio-chart-box" style="display:none">
+    <div class="chart-title">📊 Evolução da Composição Corporal</div>
+    <div class="chart-wrap"><canvas id="bio-canvas" height="200"></canvas></div>
+  </div>
+
+  <div class="tbl-wrap" id="bio-tbl-wrap" style="display:none">
+    <div class="tbl-hdr" style="background:linear-gradient(135deg,#6A0F49,#9C27B0)"><h3>Histórico de Bioimpedância</h3><span class="badge">Toda Quinta-feira</span></div>
+    <div class="tbl-scroll"><table>
+      <thead><tr><th>Data</th><th>Peso</th><th>IMC</th><th>Gordura %</th><th>Gordura kg</th><th>M. Musc. Esq.</th><th>M. Musc. Total</th><th>Água %</th><th>G. Visceral</th></tr></thead>
+      <tbody id="tbody-bio"></tbody>
     </table></div>
   </div>
 </main>
@@ -417,42 +433,88 @@ function desenharGraficoMedidas(canvas, medidas) {
 }
 
 // ── MAPA CORPO ──
+// medKeys = ['busto','bracoDireito','bracoEsquerdo','cintura','abdomen','quadril','coxaDireita','coxaEsquerda']
+const bmColors = {
+  busto:'#C2185B', cintura:'#E91E8C', abdomen:'#9C27B0', quadril:'#FF5722',
+  bracoDireito:'#00695C', bracoEsquerdo:'#00695C', coxaDireita:'#E65100', coxaEsquerda:'#E65100'
+};
+const bmLabels = {
+  busto:'Busto', cintura:'Cintura', abdomen:'Abdômen', quadril:'Quadril',
+  bracoDireito:'Braço dir.', bracoEsquerdo:'Braço esq.', coxaDireita:'Coxa dir.', coxaEsquerda:'Coxa esq.'
+};
+
+function bmTag(key, cur, diff) {
+  const color = bmColors[key];
+  const dcls = diff==null?'zero':diff<0?'good':diff>0?'bad':'zero';
+  const dColor = dcls==='good'?'#2E7D32':dcls==='bad'?'#C62828':'#999';
+  const dtxt = diff==null?'sem dados anteriores':(diff===0?'sem alteração':(diff<0?diff.toFixed(1):'+'+diff.toFixed(1))+' cm desde início');
+  const div = document.createElement('div');
+  div.className = 'bm-tag';
+  div.style.borderLeft = `3px solid ${color}`;
+  div.innerHTML = `<div class="bm-tag-name">${bmLabels[key]}</div>
+    <div class="bm-tag-val" style="color:${color}">${cur} cm</div>
+    <div class="bm-tag-diff" style="color:${dColor}">${dtxt}</div>`;
+  return div;
+}
+function bmSpacer(h) {
+  const d = document.createElement('div');
+  d.className = 'bm-spacer';
+  d.style.height = h+'px';
+  return d;
+}
+
 function renderCorpo(medidas) {
-  const leg = $('body-legend'); leg.innerHTML='';
+  const colL = $('bm-col-left'), colR = $('bm-col-right');
+  colL.innerHTML = ''; colR.innerHTML = '';
   const comDados = medidas.filter(m=>medKeys.some(k=>m[k]!=null));
   if(comDados.length===0){
-    leg.innerHTML='<p style="font-size:12px;color:var(--muted)">Preencha as medidas na planilha para ver aqui.</p>';
+    colR.innerHTML = '<p style="font-size:12px;color:var(--muted);max-width:160px">Preencha as medidas na planilha para ver aqui.</p>';
     return;
   }
   const last = comDados[comDados.length-1];
   const first = comDados[0];
-  const bodyColors = {
-    busto:'#C2185B', bracoDireito:'#00695C', bracoEsquerdo:'#00695C',
-    cintura:'#E91E8C', abdomen:'#9C27B0', quadril:'#FF5722',
-    coxaDireita:'#E65100', coxaEsquerda:'#E65100'
-  };
-  medKeys.forEach((key,ki)=>{
+  const vals = {};
+  medKeys.forEach(key => {
     const cur = last[key], ini = first[key];
-    if(cur==null) return;
-    const diff = ini!=null ? cur-ini : null;
-    const dcls = diff==null?'zero':diff<0?'good':diff>0?'bad':'zero';
-    const dtxt = diff==null?'—': (diff===0?'sem alteração': (diff<0?diff.toFixed(1):'+'+diff.toFixed(1))+' cm desde o início');
-    const item = document.createElement('div');
-    item.className='legend-item';
-    item.innerHTML=`<div class="legend-dot" style="background:${bodyColors[key]}"></div>
-      <div class="legend-info">
-        <div class="legend-name">${medLabels[ki]}</div>
-        <div class="legend-val">${cur} <small style="font-size:13px;font-weight:400">cm</small></div>
-        <div class="legend-diff ${dcls}">${dtxt}</div>
-      </div>`;
-    leg.appendChild(item);
-    // Pulsa o ponto no corpo
-    const dot = $(medDots[ki]);
-    if(dot) {
-      dot.setAttribute('r', diff!=null&&diff<0?'7':'5');
-      dot.setAttribute('opacity', diff!=null&&diff<0?'1':'.9');
-    }
+    vals[key] = { cur, diff: (cur!=null && ini!=null) ? cur-ini : null };
   });
+
+  // COLUNA ESQUERDA: Braço esq (y~134, topo do SVG~134/420*alturaReal) + Coxa esq (y~284)
+  // SVG viewBox height 420 → escala proporcional ao espaço entre tags
+  if(vals.bracoEsquerdo.cur != null) {
+    colL.appendChild(bmSpacer(110));
+    colL.appendChild(bmTag('bracoEsquerdo', vals.bracoEsquerdo.cur, vals.bracoEsquerdo.diff));
+  }
+  if(vals.coxaEsquerda.cur != null) {
+    colL.appendChild(bmSpacer(120));
+    colL.appendChild(bmTag('coxaEsquerda', vals.coxaEsquerda.cur, vals.coxaEsquerda.diff));
+  }
+
+  // COLUNA DIREITA: Busto(90), Cintura(124), Abdômen(150), Braço dir(134), Quadril(214), Coxa dir(284)
+  if(vals.busto.cur != null) {
+    colR.appendChild(bmSpacer(58));
+    colR.appendChild(bmTag('busto', vals.busto.cur, vals.busto.diff));
+  }
+  if(vals.cintura.cur != null) {
+    colR.appendChild(bmSpacer(2));
+    colR.appendChild(bmTag('cintura', vals.cintura.cur, vals.cintura.diff));
+  }
+  if(vals.abdomen.cur != null) {
+    colR.appendChild(bmSpacer(2));
+    colR.appendChild(bmTag('abdomen', vals.abdomen.cur, vals.abdomen.diff));
+  }
+  if(vals.bracoDireito.cur != null) {
+    colR.appendChild(bmSpacer(2));
+    colR.appendChild(bmTag('bracoDireito', vals.bracoDireito.cur, vals.bracoDireito.diff));
+  }
+  if(vals.quadril.cur != null) {
+    colR.appendChild(bmSpacer(20));
+    colR.appendChild(bmTag('quadril', vals.quadril.cur, vals.quadril.diff));
+  }
+  if(vals.coxaDireita.cur != null) {
+    colR.appendChild(bmSpacer(58));
+    colR.appendChild(bmTag('coxaDireita', vals.coxaDireita.cur, vals.coxaDireita.diff));
+  }
 }
 
 // ── PESOS TABLE ──
@@ -584,8 +646,122 @@ function render(data){
   $('loading').classList.add('out');
 }
 
+// ── BIOIMPEDÂNCIA ──
+const bioKeys   = ['peso','imc','gordPct','gordKg','massaMuscEsq','massaMuscTotal','aguaPct','gordVisceral'];
+const bioLabels = ['Peso','IMC','Gordura %','Gordura (kg)','M. Musc. Esquelética','M. Musc. Total','Água %','Gordura Visceral'];
+const bioUnits  = ['kg','','%','kg','kg','kg','%',''];
+const bioColors = ['#C2185B','#6A0F49','#E65100','#FF5722','#00695C','#00897B','#0288D1','#9C27B0'];
+const bioGoodDown = [true,true,true,true,false,false,false,true]; // true = menor é melhor
+
+function renderBioCards(bio) {
+  const container = $('bio-cards');
+  container.innerHTML = '';
+  if(bio.length === 0) {
+    container.innerHTML = '<p style="color:var(--muted);font-size:13px;grid-column:1/-1">Preencha a aba BIOIMPEDÂNCIA na planilha para ver a análise aqui.</p>';
+    return;
+  }
+  const last = bio[bio.length-1];
+  const first = bio[0];
+  // Mostra os indicadores mais relevantes nos cards (gordura%, massa muscular, água%, visceral)
+  const destaque = [2,5,6,7]; // índices em bioKeys: gordPct, massaMuscTotal, aguaPct, gordVisceral
+  destaque.forEach(idx => {
+    const key = bioKeys[idx];
+    const cur = last[key], ini = first[key];
+    if(cur == null) return;
+    const diff = ini != null ? cur - ini : null;
+    let arrow = '', cls = 'stat-mini';
+    if(diff != null && diff !== 0) {
+      const isGood = bioGoodDown[idx] ? diff < 0 : diff > 0;
+      arrow = (diff > 0 ? '↑ +' : '↓ ') + Math.abs(diff).toFixed(1);
+    }
+    const d = document.createElement('div');
+    d.className = 'stat-mini';
+    d.innerHTML = `<div class="stat-mini-lbl">${bioLabels[idx]}</div>
+      <div class="stat-mini-val" style="color:${bioColors[idx]}">${cur}${bioUnits[idx]}</div>
+      <div class="stat-mini-sub">${diff!=null ? arrow+bioUnits[idx]+' desde início' : 'primeira medição'}</div>`;
+    container.appendChild(d);
+  });
+}
+
+function desenharGraficoBio(canvas, bio) {
+  const dpr = window.devicePixelRatio||1;
+  const W = Math.max(canvas.parentElement.clientWidth||400, 320);
+  const H = 220;
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  canvas.style.width=W+'px'; canvas.style.height=H+'px';
+  const ctx=canvas.getContext('2d'); ctx.scale(dpr,dpr);
+  const pad={t:20,r:90,b:36,l:44};
+  const cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
+
+  // Plota gordura% e água% (ambos em escala 0-100, comparáveis)
+  const seriesKeys = ['gordPct','aguaPct','massaMuscTotal'];
+  const seriesLabels = ['Gordura %','Água %','M. Musc. (kg)'];
+  const seriesColors = ['#E65100','#0288D1','#00695C'];
+
+  const series = seriesKeys.map((key,ki) => {
+    const rows = bio.filter(b => b[key] != null);
+    if(rows.length < 2) return null;
+    return { label: seriesLabels[ki], color: seriesColors[ki], pts: rows.map((b,i)=>({x:i,y:b[key]})) };
+  }).filter(Boolean);
+  if(series.length === 0) return;
+
+  const allVals = series.flatMap(s=>s.pts.map(p=>p.y));
+  const minV = Math.min(...allVals)-3, maxV = Math.max(...allVals)+3;
+  const nPts = Math.max(...series.map(s=>s.pts.length));
+  const sx = i => pad.l+(nPts<=1?cW/2:(i/(nPts-1))*cW);
+  const sy = v => pad.t+cH-((v-minV)/(maxV-minV))*cH;
+
+  ctx.strokeStyle='#F5F0F2'; ctx.lineWidth=1;
+  for(let i=0;i<=4;i++){
+    const y=pad.t+(i/4)*cH;
+    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(pad.l+cW,y); ctx.stroke();
+    const v=maxV-(i/4)*(maxV-minV);
+    ctx.fillStyle='#aaa'; ctx.font='9px DM Sans'; ctx.textAlign='right';
+    ctx.fillText(v.toFixed(0),pad.l-6,y+3);
+  }
+  series.forEach(s=>{
+    ctx.beginPath(); ctx.strokeStyle=s.color; ctx.lineWidth=2;
+    ctx.lineJoin='round'; ctx.lineCap='round';
+    s.pts.forEach((p,i)=>i===0?ctx.moveTo(sx(p.x),sy(p.y)):ctx.lineTo(sx(p.x),sy(p.y)));
+    ctx.stroke();
+    s.pts.forEach(p=>{ ctx.beginPath(); ctx.arc(sx(p.x),sy(p.y),3,0,Math.PI*2); ctx.fillStyle=s.color; ctx.fill(); });
+    const last=s.pts[s.pts.length-1];
+    ctx.fillStyle=s.color; ctx.font='bold 9px DM Sans'; ctx.textAlign='left';
+    ctx.fillText(s.label, W-pad.r+8, sy(last.y)+3);
+  });
+  for(let i=0;i<nPts;i++){
+    ctx.fillStyle='#aaa'; ctx.font='9px DM Sans'; ctx.textAlign='center';
+    ctx.fillText('S'+(i+1),sx(i),H-pad.b+14);
+  }
+}
+
+function renderBio(bio) {
+  renderBioCards(bio);
+  if(bio.length >= 2) {
+    $('bio-chart-box').style.display = 'block';
+    setTimeout(()=>desenharGraficoBio($('bio-canvas'), bio), 100);
+  }
+  if(bio.length > 0) {
+    $('bio-tbl-wrap').style.display = 'block';
+    const tbody = $('tbody-bio'); tbody.innerHTML = '';
+    bio.forEach(row => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${fmtD(row.data)}</td>
+        <td>${row.peso!=null?row.peso.toFixed(1):'—'}</td>
+        <td>${row.imc!=null?row.imc.toFixed(1):'—'}</td>
+        <td>${row.gordPct!=null?row.gordPct.toFixed(1)+'%':'—'}</td>
+        <td>${row.gordKg!=null?row.gordKg.toFixed(1):'—'}</td>
+        <td>${row.massaMuscEsq!=null?row.massaMuscEsq.toFixed(1):'—'}</td>
+        <td>${row.massaMuscTotal!=null?row.massaMuscTotal.toFixed(1):'—'}</td>
+        <td>${row.aguaPct!=null?row.aguaPct.toFixed(1)+'%':'—'}</td>
+        <td>${row.gordVisceral!=null?row.gordVisceral:'—'}</td>`;
+      tbody.appendChild(tr);
+    });
+  }
+}
+
 // ── JSONP ──
-window.__cb__=function(data){ clearTimeout(window.__to__); $('err').style.display='none'; render(data); };
+window.__cb__=function(data){ clearTimeout(window.__to__); $('err').style.display='none'; render(data); if(data.bioimpedancia) renderBio(data.bioimpedancia); };
 function carregar(){
   $('loading').classList.remove('out'); $('err').style.display='none';
   const old=$('jsonp-s'); if(old) old.remove();
