@@ -406,7 +406,7 @@ function desenharGraficoMedidas(canvas, medidas, chavesAtivas) {
   const pad={t:20,r:16,b:56,l:48};
   const cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
 
-  const keysToShow = chavesAtivas && chavesAtivas.length>0 ? chavesAtivas : medKeys;
+  const keysToShow = chavesAtivas || [];
 
   // Cada série = valores reais em cm, só das chaves selecionadas
   const series = medKeys.map((key,ki)=>{
@@ -473,26 +473,30 @@ function renderMedFilter(comDados) {
   const disponiveis = medKeys.filter((k,ki) => comDados.filter(m=>m[k]!=null).length >= 2);
   if(disponiveis.length === 0) return;
 
-  medFiltroAtivo = [...disponiveis]; // todas ativas por padrão
+  // Começa com a primeira medida selecionada (gráfico nunca vazio na abertura)
+  medFiltroAtivo = [disponiveis[0]];
 
   disponiveis.forEach(key => {
     const ki = medKeys.indexOf(key);
+    const isActive = medFiltroAtivo.includes(key);
     const pill = document.createElement('div');
-    pill.className = 'bm-pill active';
-    pill.style.background = medColors[ki];
-    pill.style.color = '#fff';
-    pill.innerHTML = `<span class="bm-pill-dot" style="background:#fff"></span>${medLabels[ki]}`;
+    pill.className = isActive ? 'bm-pill active' : 'bm-pill';
+    pill.style.background = isActive ? medColors[ki] : '';
+    pill.style.color = isActive ? '#fff' : 'var(--ink)';
+    pill.innerHTML = `<span class="bm-pill-dot" style="background:${isActive?'#fff':medColors[ki]}"></span>${medLabels[ki]}`;
     pill.onclick = () => {
       if(medFiltroAtivo.includes(key)) {
         medFiltroAtivo = medFiltroAtivo.filter(k=>k!==key);
         pill.classList.remove('active');
         pill.style.background = '';
         pill.style.color = 'var(--ink)';
+        pill.querySelector('.bm-pill-dot').style.background = medColors[ki];
       } else {
         medFiltroAtivo.push(key);
         pill.classList.add('active');
         pill.style.background = medColors[ki];
         pill.style.color = '#fff';
+        pill.querySelector('.bm-pill-dot').style.background = '#fff';
       }
       desenharGraficoMedidas($('med-canvas'), comDados, medFiltroAtivo);
     };
